@@ -1,21 +1,41 @@
-# Lab01 - SQL Injection Discovery
+# Lab 01: SQL Injection Discovery
+
+> Explore how unsanitized input can lead to authentication bypass and data leakage.
 
 ## Objective
-Identify and exploit a basic SQL injection vulnerability within a deliberately vulnerable web application and document mitigation strategies.
+Deploy DVWA, discover an injectable parameter, and exploit it with manual techniques and `sqlmap`. Demonstrate mitigations.
 
-## Tools Used
-- DVWA (Damn Vulnerable Web Application)
-- sqlmap
-- Burp Suite
+## Environment
+- DVWA running in Docker
+- Tools: Burp Suite, `sqlmap`
 
-## Steps
-1. Enumerated the login form and intercepted requests with Burp Suite.
-2. Used `sqlmap` to automate detection and extraction of user credentials.
-3. Demonstrated how parameterized queries prevent injection attacks.
+## Procedure
+1. **Setup DVWA**
+   ```bash
+   docker build -t dvwa-lab .
+   docker run -d -p 8080:80 dvwa-lab
+   ```
+   Browse to `http://localhost:8080` and log in with `admin` / `password`.
+
+2. **Manual probing**
+   - Intercepted the login request with Burp Suite.
+   - Tested `' or '1'='1` in the username field to bypass authentication.
+
+3. **Automated exploitation**
+   - Used `sqlmap` to enumerate the `users` table:
+     ```bash
+     sqlmap -u "http://localhost:8080/vulnerabilities/sqli/?id=1&Submit=Submit" --cookie="PHPSESSID=<id>; security=low" --dump
+     ```
+
+4. **Mitigation**
+   - Enabled prepared statements and strict input validation to block injection attempts.
 
 ## Findings
-- The application accepted unsanitized input, allowing authentication bypass and data exfiltration.
-- Implementing prepared statements and input validation mitigated the issue.
+- Unsanitized `id` parameter allowed data extraction and login bypass.
+- Parameterized queries and least privilege reduce exposure.
 
-## References
-- [OWASP SQL Injection](https://owasp.org/www-community/attacks/SQL_Injection)
+## MITRE ATT&CK Mapping
+- [T1190: Exploit Public-Facing Application](https://attack.mitre.org/techniques/T1190/)
+
+## Lessons Learned
+Understanding both offensive and defensive techniques is crucial when assessing web applications.

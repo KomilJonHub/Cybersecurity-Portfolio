@@ -115,6 +115,9 @@ By the end of the investigation, multiple IoCs were identified across host and n
 
 ---
 
+## MITRE ATT&CK Mapping
+- [T1059.001: PowerShell](https://attack.mitre.org/techniques/T1059/001/)
+
 ## Findings & Lessons Learned
 
 This investigation demonstrated how **threat hunting connects scattered evidence into a clear attack story**.  
