@@ -4,7 +4,6 @@
 </p>
 
 <p align="center">
-  <a href="./Komiljon_Karimov_Resume.pdf"><b>Resume</b></a> •
   <a href="https://www.linkedin.com/in/komiljon-karimov-secops"><b>LinkedIn</b></a>
 </p>
 
