@@ -1,0 +1,69 @@
+<svg width="1280" height="320" viewBox="0 0 1280 320" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Komiljon Karimov — Cybersecurity Portfolio Banner</title>
+  <desc id="desc">Professional gradient banner with wave accent and role tagline.</desc>
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1280" y2="320" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#0F172A"/>
+      <stop offset="0.5" stop-color="#0B1224"/>
+      <stop offset="1" stop-color="#020617"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1280" y2="0">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="0.5" stop-color="#60A5FA"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+    <filter id="softGlow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="16" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <clipPath id="round">
+      <rect x="0" y="0" width="1280" height="320" rx="20" ry="20"/>
+    </clipPath>
+  </defs>
+
+  <rect width="1280" height="320" fill="url(#g)" clip-path="url(#round)"/>
+
+  <!-- Accent wave -->
+  <path d="M0,230 C200,280 360,180 560,230 C760,280 940,210 1280,250 L1280,320 L0,320 Z"
+        fill="url(#accent)" opacity="0.18" clip-path="url(#round)"/>
+  <path d="M0,250 C220,300 360,210 580,260 C820,320 980,240 1280,280 L1280,320 L0,320 Z"
+        fill="url(#accent)" opacity="0.10" clip-path="url(#round)"/>
+
+  <!-- Name and role -->
+  <g transform="translate(64,108)">
+    <text x="0" y="0" fill="#E2E8F0" font-family="Inter,Segoe UI,Roboto,Arial" font-size="44" font-weight="700">
+      Komiljon (Jon) Karimov
+    </text>
+    <text x="0" y="44" fill="#94A3B8" font-family="Inter,Segoe UI,Roboto,Arial" font-size="20" font-weight="500">
+      Tier 1 SOC Analyst • SIEM, Incident Response, Network Defense
+    </text>
+  </g>
+
+  <!-- Right-side chips -->
+  <g transform="translate(64,190)" filter="url(#softGlow)">
+    <rect x="0" y="0" rx="8" ry="8" width="190" height="34" fill="#0B132D" stroke="#1E293B" />
+    <text x="16" y="23" fill="#CBD5E1" font-family="Inter,Segoe UI,Roboto,Arial" font-size="16">CompTIA CySA+</text>
+
+    <rect x="204" y="0" rx="8" ry="8" width="200" height="34" fill="#0B132D" stroke="#1E293B" />
+    <text x="220" y="23" fill="#CBD5E1" font-family="Inter,Segoe UI,Roboto,Arial" font-size="16">Splunk Core User</text>
+
+    <rect x="412" y="0" rx="8" ry="8" width="210" height="34" fill="#0B132D" stroke="#1E293B" />
+    <text x="428" y="23" fill="#CBD5E1" font-family="Inter,Segoe UI,Roboto,Arial" font-size="16">Cisco Network Defense</text>
+  </g>
+
+  <!-- Subtle grid dots -->
+  <g opacity="0.12">
+    <defs>
+      <pattern id="dots" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+        <circle cx="1" cy="1" r="1" fill="#475569"/>
+      </pattern>
+    </defs>
+    <rect x="860" y="0" width="420" height="320" fill="url(#dots)" clip-path="url(#round)"/>
+  </g>
+
+  <!-- Footer accent line -->
+  <rect x="0" y="312" width="1280" height="8" fill="url(#accent)" clip-path="url(#round)"/>
+</svg>

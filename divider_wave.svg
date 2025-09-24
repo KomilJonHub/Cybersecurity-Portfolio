@@ -1,0 +1,12 @@
+<svg width="1280" height="16" viewBox="0 0 1280 16" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title">
+  <title id="title">Accent divider</title>
+  <defs>
+    <linearGradient id="accent2" x1="0" y1="0" x2="1280" y2="0">
+      <stop stop-color="#22D3EE"/>
+      <stop offset="0.5" stop-color="#60A5FA"/>
+      <stop offset="1" stop-color="#A78BFA"/>
+    </linearGradient>
+  </defs>
+  <rect x="0" y="7" width="1280" height="2" fill="#0B132D"/>
+  <rect x="0" y="7" width="1280" height="2" fill="url(#accent2)" opacity="0.9"/>
+</svg>
