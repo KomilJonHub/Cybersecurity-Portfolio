@@ -65,6 +65,9 @@ Subnets scanned:
 All screenshots are saved in the [`screenshots/`](./screenshots/) folder.  
 Each image highlights an important step: ping sweeps, port scans, version scans, and OS detection.  
 
+## MITRE ATT&CK Mapping
+- [T1046: Network Service Discovery](https://attack.mitre.org/techniques/T1046/)
+
 ##  Lessons Learned
 - **Ping sweeps alone are unreliable** — some hosts block ICMP, requiring additional scans.  
 - **SYN scans** provide stealthy, fast results for identifying open ports.  

@@ -45,3 +45,6 @@ Audit a Linux virtual machine using Lynis and apply hardening techniques to fix 
 ---
 
 > This lab shows how to identify and fix basic system-level security issues on a Linux VM using CLI tools.
+
+## MITRE ATT&CK Mapping
+- [T1562.004: Disable or Modify System Firewall](https://attack.mitre.org/techniques/T1562/004/)
