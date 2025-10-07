@@ -154,7 +154,7 @@ Ready to start immediately; open to remote and relocation.
   <a href="#">
     <img alt="Splunk Core Certified User (Target Oct 2025)" title="Splunk Core Certified User (Target Oct 2025)" src="https://img.shields.io/badge/Splunk_Core_User-0F172A?style=for-the-badge&logo=splunk&logoColor=E2E8F0" />
   </a>
-  <a href="#">
+  <a href="https://www.credly.com/badges/4be7998b-7d20-4acf-be55-59730f2e40db/public_url">
     <img alt="Google Cybersecurity Certificate (In Progress)" title="Google Cybersecurity Certificate (In Progress)" src="https://img.shields.io/badge/Google_Cybersecurity_Certificate-0F172A?style=for-the-badge&logo=google&logoColor=E2E8F0" />
   </a>
 </p>
