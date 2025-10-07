@@ -54,7 +54,7 @@ Ready to start immediately; open to remote and relocation.
 
 | Domain | Lab | Key Deliverables |
 |---|---|---|
-| **SIEM & Search Optimization** | [Splunk Search Optimisation](04_SIEM_Log_Analysis/Lab03_Splunk_Search_optimisation) | Efficient queries using `tstats`; dashboards & Job Inspector analysis; cost–performance trade‑off |
+| **SIEM & Statistical Processing** | [Splunk Statistical Processing](04_SIEM_Log_Analysis/Lab07_Splunk_Statistical_Processing) | Multi-series timecharts, stats/eval transformations, stakeholder-ready visuals for security, marketing, facilities |
 | **Network & PCAP Analysis** | [Passive Scanning with Wireshark](04_SIEM_Log_Analysis/Lab02_Passive_Scanning_Wireshark) | Clean packet captures, protocol filters; evidence of suspicious patterns; ATT&CK T1040 |
 | **Threat Hunting & Intel** | [Threat Hunting Case Study](06_Threat_Intel_Vuln_Analysis/Lab03_Threat_Hunting) | Hunt methodology, custom queries, findings and remediation actions |
 | **Risk & GRC** | [Botium Toys Risk Assessment](01_GRC_Compliance/Lab02_Botium_Toys_Risk_Assessment) | Asset inventory, risk matrix, likelihood/impact calculation, controls mapping |
