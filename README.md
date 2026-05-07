@@ -49,6 +49,47 @@ I am especially interested in work involving SIEM monitoring, alert triage, inci
 - **22+ hands-on cybersecurity labs** across SIEM, threat hunting, GRC, network security, host hardening, web security, cryptography, and incident response
 - Practical IT/security experience supporting small-business operations, secure access, endpoint protection, VPN basics, credential hygiene, and website administration
 
+<details>
+  <summary><b>Open Cybersecurity Profile Map</b></summary>
+
+```mermaid
+mindmap
+  root((Komiljon Karimov))
+    Target Roles
+      SOC Analyst
+      Security Analyst
+      GRC Analyst
+      Security-Focused IT Support
+    Certifications
+      CompTIA CySA+
+      Splunk Core Certified User
+      Google Cybersecurity Professional Certificate
+      Cisco Network Defense
+      Cisco Endpoint Security
+    Hands-On Evidence
+      22+ Cybersecurity Labs
+      SIEM Analysis with Splunk
+      Network Traffic Analysis with Wireshark
+      Asset Discovery with Nmap
+      Risk Assessment and NIST CSF Mapping
+      Windows and Linux System Hardening
+      Threat Hunting and Incident Documentation
+    Core Strengths
+      Structured Problem Solving
+      Clear Technical Documentation
+      Calm Under Pressure
+      Fast Learning
+      Team-Oriented Execution
+    Current Focus
+      SIEM Monitoring
+      Alert Triage
+      Vulnerability Management
+      Risk Reduction
+      Security Reporting
+```
+
+</details>
+
 <p align="center">
   <img src="./divider_wave.svg" alt="Accent divider" />
 </p>
