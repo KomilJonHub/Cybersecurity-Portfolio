@@ -1,9 +1,0 @@
-ADD ONLY SAFE, SYNTHETIC SCREENSHOTS HERE
-
-Recommended screenshots:
-- Stopped application with authorization checkbox visible
-- Active session using the displayed fake demonstration text
-- Stopped/saved status and local log path
-- Last-log viewer containing synthetic data only
-
-Never include a real password, private message, account name, or other secret.
