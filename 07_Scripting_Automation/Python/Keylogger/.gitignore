@@ -1,0 +1,11 @@
+# Local Python environment and generated caches
+.venv/
+__pycache__/
+*.py[cod]
+
+# Newly generated keyboard-monitoring session logs
+logs/session_*.txt
+course-submission/logs/session_*.txt
+
+# Keep the sanitized portfolio example
+!logs/sample_synthetic_log.txt
