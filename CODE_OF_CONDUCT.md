@@ -8,7 +8,7 @@ This repository is a personal portfolio. Keep interactions professional.
 
 **Enforcement:** Reports via GitHub Issues or LinkedIn. I may edit/lock/ban at my discretion.
 
-Contact: https://www.linkedin.com/in/komiljon-karimov-secops
+Contact: https://www.linkedin.com/in/komiljon-karimov
 
 ---
 

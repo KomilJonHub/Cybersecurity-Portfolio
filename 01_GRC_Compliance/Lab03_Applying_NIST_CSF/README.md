@@ -1,113 +1,99 @@
 # Lab03 — Applying the NIST CSF
 
-## Scenario
-In this lab I applied the NIST Cybersecurity Framework (CSF) to two real-world style incidents at a small retail company:  
-1) a **credential-phishing data breach** that exposed and manipulated customer records, and  
-2) a **DDoS (ICMP flood)** that took internal services offline.  
-I used the CSF’s five functions—Identify, Protect, Detect, Respond, Recover—to analyze causes, select controls, and document playbooks the team can run next time.
+[Portfolio](../../README.md) / [GRC & Compliance](../README.md)
+
+[Overview](#overview) · [Objectives](#objectives) · [Lessons Learned](#lessons-learned) · [Practical Value](#practical-value)
+
+## Overview
+
+I completed a Google Cybersecurity course incident-analysis exercise using the NIST Cybersecurity Framework. I used the supplied guide and phishing example to organize my own written analysis of a **simulated ICMP-flood denial-of-service incident**. The work connects a configuration gap, business disruption, protective controls, response, and recovery.
+
+The course material uses the original **five-function CSF structure**: Identify, Protect, Detect, Respond, and Recover. This exercise follows that pre-CSF 2.0 structure.
 
 ## Objectives
-- Map people, processes, technology, and data to CSF functions  
-- Perform incident analysis for two cases and document control gaps  
-- Propose high-impact mitigations and operating procedures  
-- Produce short playbooks for response and recovery
 
-## Files in this folder
-- [`Applying the NIST CSF .pdf`](./Applying%20the%20NIST%20CSF%20.pdf) — framework guide and prompts  
-- [`Completed Example of an Incident report analysis.pdf`](./Completed%20Example%20of%20an%20Incident%20report%20analysis.pdf) — credential-phishing incident write-up  
-- [`Incident report analysis.pdf`](./Incident%20report%20analysis.pdf) — DDoS (ICMP flood) incident write-up
+- Structure incident analysis around the framework's functions
+- Connect affected services and configuration gaps with business impact
+- Explain protective and detective controls in the scenario
+- Organize response and recovery actions into a usable written plan
 
----
+## Files and Attribution
 
-## What I did
+| File | Role in the exercise |
+|---|---|
+| [Applying the NIST CSF](./Applying%20the%20NIST%20CSF%20.pdf) | Supplied framework guide and analysis prompts |
+| [Completed Example of an Incident report analysis](./Completed%20Example%20of%20an%20Incident%20report%20analysis.pdf) | Supplied model answer about credential phishing, used as a reference |
+| [Incident report analysis](./Incident%20report%20analysis.pdf) | My completed ICMP-flood analysis and reflections, using the course template |
 
-### 1) Framed work with the NIST CSF
-I structured all analysis and deliverables around the five CSF functions: **Identify**, **Protect**, **Detect**, **Respond**, and **Recover**. For each function I used the guide’s question prompts to drive evidence collection, gaps, and actions.
+I completed the written analysis in the course template. The tables and sections below distinguish supplied scenario actions, my analysis, and recommendations.
 
-### 2) Incident A — Credential phishing → data exposure and tampering
-**Summary:** An intern was phished and entered credentials into a fake site. The attacker used the account to access the customer database, exposing records and altering/deleting some entries.
+## How I Applied the Framework
 
-**Identify**
-- Mapped affected assets: intern account, IAM policy, customer DB, access logs  
-- Confirmed compromise path and data integrity impact
+### 1. Use the Guide to Ask Specific Questions
 
-**Protect**
-- Enforced **MFA** on all user accounts  
-- Limited login attempts to **three tries**  
-- Launched awareness training on phishing and credential safety  
-- Hardened the perimeter: updated firewall rules and added **IPS**
+I used each function to move from the incident description to a structured assessment: what was affected, which safeguards were missing, what signals would help detection, how the team should respond, and how normal service could be restored.
 
-**Detect**
-- Turned on firewall logging and added **IDS** coverage for unauthorized access attempts  
-- Tuned monitoring to alert on anomalous DB reads/edits from user roles like “intern”
+### 2. Learn from the Supplied Credential-Phishing Example
 
-**Respond**
-- Disabled the compromised account immediately  
-- Notified leadership and customers; prepared notifications to regulators/law enforcement as required  
-- Delivered targeted training to interns and staff
+The model answer describes an intern entering credentials on a fake website. Access logs suggest an attacker used the account to access customer records, and employees report missing or altered records.
 
-**Recover**
-- Restored the customer DB from the **last full backup**  
-- Instructed staff to re-enter changes made after the backup window
+| Function | What the supplied example describes |
+|---|---|
+| **Identify** | Review affected systems, access policies, compromised credentials, and possible data deletion |
+| **Protect** | The fictional team has added MFA and a three-attempt login limit; a protective firewall configuration and IPS investment are future actions |
+| **Detect** | Planned firewall logging and IDS monitoring |
+| **Respond** | Account disabled, employee training, leadership informed, and planned customer/other required notifications |
+| **Recover** | Planned restoration from the previous night's backup, followed by re-entry of newer customer changes |
 
-**Outputs**
-- Updated access policy and training module  
-- Firewall/IPS change ticket and evidence  
-- Post-incident report with timeline, root cause, and corrective actions
+This supplied example helped me separate confidentiality and integrity impacts from recovery needs. A specific login-attempt limit also needs context because an overly rigid lockout can disrupt legitimate users.
 
-### 3) Incident B — DDoS (ICMP flood) → service outage
-**Summary:** Multiple sources sent high-volume ICMP packets that overwhelmed the network. Internal services were unusable for ~2 hours.
+### 3. Complete My ICMP-Flood Incident Analysis
 
-**Identify**
-- Found a firewall configuration gap that allowed excessive inbound ICMP  
-- Confirmed multi-source flooding pattern
+**Scenario facts:** The supplied case describes a large volume of ICMP traffic, an inadequately configured firewall, and internal services unavailable for about two hours. The response team blocks incoming ICMP, takes noncritical services offline, and restores essential services.
 
-**Protect**
-- Added firewall **rate-limits** for ICMP  
-- Enabled **source IP verification** to drop spoofed packets  
-- Implemented continuous network monitoring  
-- Deployed **IDS/IPS** with ICMP flood signatures
+**Identify — connect cause and impact**
 
-**Detect**
-- Alerting via firewall logs, IDS/IPS, and traffic-pattern monitoring
+I explained how the firewall configuration allowed the flood to disrupt normal traffic. I connected that technical gap with service availability and the need to review the network's protective configuration.
 
-**Respond**
-- Blocked offending traffic at the edge  
-- Took non-critical services offline to preserve core functions  
-- Used IDS/IPS alerts to guide containment steps
+**Protect — map safeguards to the gap**
 
-**Recover**
-- Brought services back online in a controlled sequence  
-- Performed stability checks and a **lessons-learned** review
+My report describes the scenario team's ICMP rate limiting, source-address verification, monitoring, and IDS/IPS measures. I used these controls to explain how to reduce the chance and impact of a similar event.
 
-**Outputs**
-- Network hardening changes and validation screenshots  
-- DDoS response checklist and comms template  
-- Monitoring thresholds and alert runbook
+**Detect — define useful signals**
 
----
+I connected firewall events, IDS/IPS alerts, and unusual traffic patterns with earlier recognition of a flood. Detection needs thresholds and a person or team responsible for acting on the signal.
 
-## Controls Implemented (roll-up)
-- **Identity & Access:** MFA, login-attempt throttling, role reviews  
-- **Perimeter & Network:** Updated firewall policy, ICMP rate-limit, source validation, WAF/IPS where applicable  
-- **Monitoring & Detection:** Firewall logging, IDS/IPS rules, anomaly alerts for DB access  
-- **Awareness & Training:** Phishing defense module for interns and employees  
-- **Backup & Recovery:** Verified full backup restore for DB, service restart plan after outages
+**Respond — organize future actions**
 
-## Playbooks Produced
-- **Phishing / Account Compromise:** isolate account → contain DB access → notify → restore → rotate secrets → train  
-- **DDoS / ICMP Flood:** identify pattern → rate-limit/block → scale protections → comms to stakeholders → staged recovery → retrospective
+I described blocking or filtering attack traffic, using detection alerts to guide containment, and training staff on the response process. Filtering requires care: source addresses can be spoofed, and local controls alone may not prevent an upstream link from saturating.
+
+**Recover — restore service carefully**
+
+I outlined a controlled restart of network services, stability checks, review for remaining vulnerabilities, and sharing lessons learned. These steps form the recovery section of my written analysis.
+
+## Response and Recovery Outline
+
+I condensed the framework analysis into these documentation sequences:
+
+- **Credential phishing, based on the model case:** review account activity → contain compromised access → coordinate notifications → restore affected data → reconcile changes after the backup → improve authentication and awareness.
+- **ICMP flood, based on my analysis:** recognize abnormal traffic → filter or rate-limit within the response plan → protect essential services → communicate impact → restore in stages → review configuration and monitoring.
+
+These outlines summarize the response and recovery reasoning in the written work.
 
 ## Lessons Learned
-- Small configuration gaps create large blast radius. Guardrails like MFA, throttling, and least privilege shrink it.  
-- Monitoring needs explicit signals for *integrity* events, not just availability.  
-- Recovery plans must include **restore+re-entry** steps for data lost after the last backup.
 
-## How this maps to the job
-- **SOC Analyst:** write detections for anomalous DB edits by low-privilege roles; ICMP flood thresholds; failed-login + phishing correlation  
-- **GRC Analyst:** map implemented controls to CSF categories; maintain evidence; schedule tabletop exercises and restore drills
+- Framework functions help keep a technical incident connected to people, services, and business impact.
+- Proposed safeguards, scenario actions, and actions I actually performed must be distinguished in a report.
+- Restoring a backup is only one part of recovery; newer changes and communications also need attention.
+- A configuration change should be followed by a defined validation step and a review of the remaining risks.
 
----
+## Practical Value
 
-> **Author:** Komiljon Karimov  
-> **Mission:** Upskilling into Cybersecurity
+This completed analysis demonstrates structured technical writing, control selection, risk reasoning, and response planning. These skills support troubleshooting and service continuity work as well as junior GRC, risk, and security-analysis responsibilities.
+
+<p align="center"><img src="../../divider_wave.svg" alt="" width="100%" /></p>
+
+> **Author:** Komiljon Karimov<br>
+> **Mission:** Reliable technology and informed security decisions
+
+[Back to portfolio](../../README.md) · [Domain index](../README.md)

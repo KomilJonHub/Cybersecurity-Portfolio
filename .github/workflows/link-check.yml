@@ -1,9 +1,19 @@
-name: Link check
+name: Portfolio validation
 on: [push, pull_request]
+permissions:
+  contents: read
 jobs:
-  lychee:
+  local-validation:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: lycheeverse/lychee-action@v1
-        with: { args: --verbose --no-progress "**/*.md" }
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Check local links, anchors, navigation, and README consistency
+        run: python scripts/check_portfolio.py
+      - name: Test the portfolio validator
+        run: python -m unittest discover -s scripts/tests -v
+      - name: Run Python tests with mocked listeners and synthetic data
+        working-directory: 07_Scripting_Automation/Python/Keylogger
+        run: python -m unittest discover -s tests -v

@@ -1,76 +1,97 @@
-# Packet Tracer – File and Data Integrity Checks (Lab 154.10.1.13)
+# Lab 01 — File and Data Integrity Checks
 
-## Objective
+[Portfolio](../../README.md) / [Cryptography & Encryption](../README.md)
 
-This Packet Tracer scenario walks through a realistic incident where client data was encrypted and exfiltrated by an attacker.  
-My goal in there, as a role of Mike, is to restore the compromised files from a backup, verify their integrity using cryptographic hashes, identify any files that have been tampered with, and then use a keyed hash (HMAC) to validate a sensitive financial file, and gathering all the necessary information, report to my supervisor Sally about the incident.   
+[Overview](#overview) · [Objectives](#objectives) · [Environment & Tools](#environment--tools) · [What I Did](#what-i-did) · [Evidence & Results](#evidence--results) · [Lessons Learned](#lessons-learned) · [Practical Value](#practical-value)
 
-From a security operations (SOC/GRC) perspective this lab reinforces two key concepts:
+## Overview
 
-- **Data integrity matters:** after any cyber‑attack it is a must to verify that backups and restored files are unaltered before trusting them again.  
-- **Cryptographic assurance:** simple hashes detect accidental or malicious changes, while HMAC adds authentication so only those with the secret key can produce the same digest.
+I completed a Cisco Packet Tracer incident-recovery exercise as Mike, a fictional branch employee. I retrieved backup client data, compared copied file contents with supplied reference hashes, escalated suspect files to Sally, and verified an HMAC for a separate financial-data file. The business roles, financial records, and compromised services belong to the training scenario.
 
-## Tools Used
+## Objectives
 
-- **Cisco Packet Tracer** – to simulate the branch and HQ networks, FTP/HTTP servers and laptops.  
-- **CSE‑LABVM (Linux)** running in VirtualBox – used for calculating file hashes and HMACs.  
-- **FTP client & Web browser** inside Packet Tracer – to download backups from HQ and view compromised web pages.  
-- **Pluma text editor** – to store original hash values and view file contents.  
-- **`md5sum` & `openssl`** – command‑line tools on the lab VM for hashing and HMAC generation.  
+- Compare recovered content with a trusted reference before using it.
+- Document mismatches and provide suspect files for further investigation.
+- Explain how a keyed HMAC differs from an unkeyed digest.
 
-## Key Steps Performed
+## Environment & Tools
 
-1. **Identify the incident and download backups.**  
-   - Logged into the branch laptop and visited the intranet site.  Instead of client files the page displayed a ransomware message (“Your files are GONE!”), confirming the breach.  
-   - Retrieved the original file hash values from the HQ website and saved them in a text file on the lab VM.  
-   - Used the Packet Tracer FTP client to connect to the HQ server and download six client files (`NEclients.txt`, `NWclients.txt`, `Nclients.txt`, `SEclients.txt`, `SWclients.txt` and `Sclients.txt`) as a potential replacement dataset.
+- Cisco Packet Tracer branch/HQ network, browsers, FTP clients, and email
+- CSE-LABVM in VirtualBox
+- Pluma, `md5sum`, and OpenSSL
+- [Original Cisco lab instructions](Lab01_File_Data_Integrity_Checks_lab_instructions.pdf)
 
-2. **Verify integrity using MD5 hashing.**  
-   - Opened each downloaded file in Pluma and copied its contents to the lab VM.  
-   - Generated an MD5 hash with `echo -n 'contents' | md5sum` and compared it against the stored hashes.  
-   - Five files matched their expected values.  Three files (`Nclients.txt`, `NEclients.txt` `NWclients.txt`) produced a different hash, indicating tampering.  
+## What I Did
 
-3. **Report and isolate the tampered file.**  
-   - Wrote an email to the branch supervisor describing the compromise and attached the list of hashes.  
-   - On the supervisor’s laptop (HQ‑Laptop‑1), connected to the HQ FTP server using the supervisor’s credentials and downloaded the suspicious file for forensic analysis.
+### 1. Retrieve reference values and backup data
 
-4. **Validate a critical financial file with HMAC.**  
-   - On the CFO’s laptop, located the `income.txt` file containing sensitive financial data.  
-   - Copied its contents to the lab VM and generated a keyed SHA‑256 HMAC using `openssl dgst -sha256 -hmac cisco123 income.txt`.  
-   - Compared the computed HMAC (`b138706cb55787d2a01934b224ed…`) with the original HMAC stored in Pluma.  They matched, proving the file had not been altered since the last backup.  
-   - Reflected on why HMAC provides stronger assurance than a simple hash: the secret key prevents an attacker from forging the same digest, ensuring both integrity and authenticity of the data.
+I visited the branch intranet and observed the exercise's ransomware message. I copied the supplied reference hash list from HQ into Pluma, then used the Packet Tracer FTP client to retrieve the client files for comparison. The transfer sequence includes a filename retry, which is visible in the original capture.
 
-## MITRE ATT&CK Mapping
-- [T1565: Data Manipulation](https://attack.mitre.org/techniques/T1565/)
+### 2. Compare the client-file contents
 
-## Screenshots
+I copied text from the downloaded files into the lab VM and used the course's command pattern:
 
-The numbered images in this folder capture the most important steps in the investigation:
+```bash
+echo -n 'copied file contents' | md5sum
+```
 
-| Step | Description | Image |
-|-----|-------------|------|
-|1|Branch laptop shows a ransomware message; initial MD5/HMAC checks on the lab VM.|![](screenshots/1.png)|
-|2|FTP session on the branch laptop downloading client data from the HQ server.|![](screenshots/2.png)|
-|3|Listing of the downloaded files on the branch machine.|![](screenshots/3.png)|
-|4|Hashing the NE and NW client files – hashes match the trusted values.|![](screenshots/5.png)|
-|5|Hashing the Nclients file – hash differs from the stored value, indicating tampering.|![](screenshots/6.png)|
-|6|Hashing additional client files (SE and SW) for completeness.|![](screenshots/7.png)|
-|7|Supervisor’s FTP session downloading the suspicious file(s) from the HQ server for analysis.|![](screenshots/9.png)|
-|8|Computing a keyed SHA‑256 HMAC for the `income.txt` file using OpenSSL – the digest matches the original.|![](screenshots/10.png)|
+The `NEclients.txt` comparison matches the supplied reference. The captured `Nclients.txt` digest differs from its reference. My notes also flag the SE and SW entries for follow-up, and the supervisor's FTP sequence retrieves `Nclients.txt`, `SEclients.txt`, and `SWclients.txt`.
 
-## Lessons Learned / SOC & GRC Relevance
+These comparisons identify content that needs investigation. Because the exercise hashes copied text, exact characters and line endings matter; a mismatch establishes a difference from the reference, with the cause investigated in context. The screenshots preserve the original comparisons rather than supporting an invented count of matching files.
 
-- **Always verify backups before restoring:** retrieving data from an FTP server isn’t enough – you must confirm the files haven’t been tampered with. Using hashes provides a quick integrity check before trusting a backup.  
-- **Hash values don’t lie but they aren’t foolproof:** MD5 hashes make it obvious when a file changes, but anyone can recompute the hash. An attacker could replace both the file and the hash list. HMAC solves this by mixing in a secret key.  
-- **Simple tools have big value:** command‑line utilities like `md5sum` and `openssl` can be scripted to automate integrity checks across many files. In a SOC environment, similar commands would be integrated into SIEM/SOAR playbooks.  
-- **Incident reporting and escalation are crucial:** discovering the tampered file wasn’t the end – notifying the supervisor and isolating the suspect data ensured the right teams could investigate further.  
-- **Real‑world application:** digital forensics teams routinely hash disk images and evidence files to prove they haven’t been altered. GRC professionals also rely on checksums to validate the integrity of policy documents, software binaries and audit logs. Understanding how to generate and verify both hashes and HMACs is foundational for roles across cybersecurity.
+### 3. Escalate and retain the suspect material
 
----
+I followed the exercise's reporting workflow to notify the supervisor and transferred suspect files to HQ-Laptop-1 for analysis. This kept the evidence and the reason for escalation together.
 
-This lab provided hands‑on experience responding to a data‑integrity incident, reinforcing why cryptographic checks are essential in SOC and GRC workflows. By practicing these steps in a simulated environment you build muscle memory that translates directly to real‑world cyber investigations.
+### 4. Check a keyed SHA-256 HMAC
 
----
+For the supplied `income.txt` file, I ran:
 
-> **Author:** Komiljon Karimov  
-> **Mission:** Upskilling into Cybersecurity
+```bash
+openssl dgst -sha256 -hmac cisco123 income.txt
+```
+
+The HMAC shown in the terminal matches the reference in Pluma. The command's key is a public classroom value. A matching HMAC supports integrity and origin assurance when the reference is trusted and the secret key remains protected; anyone who knows the key can generate a valid tag.
+
+## Evidence & Results
+
+<details>
+<summary><b>Open the complete original integrity-check sequence</b></summary>
+
+| Evidence | Observation |
+|---|---|
+| ![Branch intranet ransomware message in the supplied scenario](screenshots/1.png) | Simulated incident prompt |
+| ![FTP download sequence with a filename retry](screenshots/2.png) | Client-data retrieval |
+| ![Branch laptop file listing after transfer](screenshots/3.png) | Files present at this point in the session |
+| ![Client text opened for copying into the hash check](screenshots/4.png) | Data used in the comparison |
+| ![NEclients hash matches its supplied reference](screenshots/5.png) | Matching NE digest |
+| ![Nclients computed digest differs from the highlighted reference](screenshots/6.png) | N comparison requiring follow-up |
+| ![Additional copied-text hash and notes flagging N, SE, and SW entries](screenshots/7.png) | Further comparison and investigation notes |
+| ![Additional hash check and matching Sclients reference](screenshots/8.png) | Continued client-data comparison |
+| ![Supervisor FTP download of N, SE, and SW client files](screenshots/9.png) | Suspect files collected for analysis |
+| ![Computed income.txt HMAC and matching supplied reference](screenshots/10.png) | Keyed SHA-256 verification |
+
+</details>
+
+## Lessons Learned
+
+- Verify the reference as well as the recovered file: an attacker who changes both an unkeyed digest and the data can defeat a naive comparison.
+- Preserve the exact bytes being checked. Copying text, changing newlines, or adding a trailing newline can change its digest.
+- MD5 demonstrates the comparison process in this historical course exercise, but its collision weaknesses make it unsuitable for modern adversarial integrity assurance. Use a suitable modern hash such as SHA-256 with a trusted reference, or a protected-key HMAC where authentication is needed.
+- An HMAC provides integrity/authentication under its key; it does not encrypt the file or identify a particular person who shares that key.
+- A clear escalation records the mismatch, reference, source data, and next investigation step.
+
+## Practical Value
+
+This lab demonstrates recovery checks, careful handling of evidence, and concise escalation. The same reasoning supports backup verification, software-integrity checks, and troubleshooting unexpected file changes.
+
+## MITRE ATT&CK Context
+
+[T1565 — Data Manipulation](https://attack.mitre.org/techniques/T1565/) provides context for investigating unexpected data changes. The specific incident and client data here are simulated course material.
+
+<p align="center"><img src="../../divider_wave.svg" alt="" width="100%" /></p>
+
+> **Author:** Komiljon Karimov<br>
+> **Mission:** Reliable technology and informed security decisions
+
+[Back to portfolio](../../README.md) · [Domain index](../README.md)

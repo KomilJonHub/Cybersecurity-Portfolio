@@ -1,12 +1,21 @@
-# 06_Threat_Intel_Vuln_Analysis
+# Threat & Vulnerability Analysis
 
-Labs focused on gathering threat intelligence and prioritizing remediation efforts.
+[Portfolio](../README.md)
+
+These assessments connect technical observations and scenario facts with prioritized investigation and control decisions.
 
 ## Labs
-- [Lab02 - Vulnerability Assessment](Lab02_Vulnerability_Assessment/README.md) – consolidated scanner findings into a risk-ranked remediation plan.
-- [Lab03 - Threat Hunting](Lab03_Threat_Hunting/README.md) – executed a guided hunt to trace adversary behavior and document indicators of compromise.
 
----
+| Lab | What the work demonstrates |
+|---|---|
+| [Vulnerability Assessment](Lab02_Vulnerability_Assessment/README.md) | Course-based access-control risk assessment and prioritized remediation plan. |
+| [Threat Hunting Investigation](Lab03_Threat_Hunting/README.md) | Host logs, processes, scripts, scheduled tasks, DNS events, and supplied traffic analysis. |
 
-> **Author:** Komiljon Karimov  
-> **Mission:** Upskilling into Cybersecurity
+Open a lab for its walkthrough, evidence, results, and lessons.
+
+<p align="center"><img src="../divider_wave.svg" alt="" width="100%" /></p>
+
+> **Author:** Komiljon Karimov<br>
+> **Mission:** Reliable technology and informed security decisions
+
+[Back to portfolio](../README.md)

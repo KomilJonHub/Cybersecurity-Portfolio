@@ -1,12 +1,23 @@
-# 02_Linux_Windows_Security
+# Linux & Windows Security
 
-Hands-on labs for strengthening Linux hosts:
-- [Lab01_LinuxPermissions](./Lab01_LinuxPermissions) – apply file permissions and ownership controls.
-- [Lab02_Linux_Hardening_Lynis](./Lab02_Linux_Hardening_Lynis) – audit and harden systems with Lynis.
-- [Lab03_Performing_System_Hardening](./Lab03_Performing_System_Hardening) – secure services through configuration tuning.
-- [Lab04_File_Permissions](./Lab04_File_Permissions) – enforce least privilege on files and directories.
+[Portfolio](../README.md)
 
----
+These labs connect day-to-day system troubleshooting with permissions, configuration review, and secure operating practices.
 
-> **Author:** Komiljon Karimov  
-> **Mission:** Upskilling into Cybersecurity
+## Labs
+
+| Lab | What the work demonstrates |
+|---|---|
+| [Linux Filesystem Permissions](Lab01_LinuxPermissions/README.md) | Mounts, ownership, permission bits, and symbolic versus hard links. |
+| [Linux Hardening with Lynis](Lab02_Linux_Hardening_Lynis/README.md) | Audit findings, firewall setup, and before/after interpretation. |
+| [Performing System Hardening](Lab03_Performing_System_Hardening/README.md) | Windows services, hosts-file troubleshooting, firewall checks, and Linux permissions. |
+| [File Permissions & Access Control](Lab04_File_Permissions/README.md) | File and directory permission changes with a completed written explanation. |
+
+Open a lab for its walkthrough, evidence, results, and lessons.
+
+<p align="center"><img src="../divider_wave.svg" alt="" width="100%" /></p>
+
+> **Author:** Komiljon Karimov<br>
+> **Mission:** Reliable technology and informed security decisions
+
+[Back to portfolio](../README.md)

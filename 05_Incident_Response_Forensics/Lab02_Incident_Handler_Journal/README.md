@@ -1,9 +1,21 @@
 # Lab02 — Incident Handler Journal
 
-## Why this lab matters
-This journal is the backbone of my incident response practice. It turns every lab and project into evidence: what happened, how I analyzed it, which controls I applied, and what I learned. Hiring managers can see how I think, not just what tools I used.
+[Portfolio](../../README.md) / [Incident Response & Forensics](../README.md)
 
-## What this is
+[Overview](#overview) · [Objectives](#objectives) · [What I Did](#what-i-did) · [Lessons Learned](#lessons-learned) · [Practical Value](#practical-value)
+
+## Overview
+
+I completed this incident-handler journal as part of my cybersecurity coursework. It records analysis of supplied ransomware, phishing, and web-application scenarios, with the 5 W’s, response phases, and recommendations. The healthcare, financial-services, and retail organizations belong to those scenarios.
+
+## Objectives
+
+- Organize incident facts and distinguish them from recommendations
+- Document the response phase, investigation reasoning, and next steps
+- Use a consistent format that another reader can follow
+
+## What I Did
+
 A living log I updated after each exercise using a consistent structure:
 - **Date and entry ID**
 - **Short description**
@@ -12,23 +24,23 @@ A living log I updated after each exercise using a consistent structure:
 - **Phase** of the NIST incident lifecycle
 - **Notes** with actions and follow-ups
 
-> Artifact: [`Incident handler’s journal.pdf`](./Incident%20handler%27s%20journal.pdf)
+> Evidence: [`Incident handler’s journal.pdf`](./Incident%20handler%27s%20journal.pdf)
 
 ---
 
-## Highlights from my entries
+## Analysis & Results
 
 ### 1) Ransomware in healthcare — detection and first analysis
 - **Focus:** Phishing-led ransomware that encrypted critical data in a healthcare environment  
 - **Phase:** Detection & Analysis  
 - **Actions:** Captured indicators, scoped impact, and documented immediate hardening ideas for email and endpoints  
-- **Outcome:** Clear next steps for awareness training and layered email/endpoint defenses
+- **Outcome:** Written recommendations for awareness training and layered email/endpoint defenses
 
 ### 2) Phishing alert with malware — tool-assisted validation
 - **Focus:** Suspicious attachment delivered via phishing  
 - **Tool:** VirusTotal to analyze the file and enrich indicators  
 - **Phase:** Detection & Analysis  
-- **Outcome:** Confirmed malicious file, refined user training, and raised the bar on mail filtering
+- **Outcome:** Documented the malicious-file finding and recommended improvements to training and mail filtering
 
 ### 3) Confirmed compromise — escalation and containment planning
 - **Focus:** User executed a malicious download; workstation showed unauthorized installs  
@@ -39,11 +51,13 @@ A living log I updated after each exercise using a consistent structure:
 - **Focus:** Unauthorized URL enumeration exposed customer orders and transactions  
 - **Phase:** Detection & Analysis **and** Containment/Eradication/Recovery  
 - **Actions:** Recommend allowlisting, stronger authZ around sensitive paths, and routine web app testing  
-- **Outcome:** Concrete web app control improvements and monitoring cues for future detections
+- **Outcome:** Recommendations for web-app authorization checks and monitoring cues
 
 ---
 
-## Timeline snapshot
+## Journal Timeline
+
+These are journal-entry dates. The underlying scenario events may have different dates, including the retail case from December 2022. The table summarizes recommendations and documented response steps.
 
 | Date       | Entry | Incident Type                              | Phase                           | Key Tool(s)  | Outcomes |
 |------------|------:|--------------------------------------------|---------------------------------|--------------|----------|
@@ -58,21 +72,23 @@ A living log I updated after each exercise using a consistent structure:
 
 ## How I use this journal
 - **IR discipline:** Enforce a repeatable structure so nothing is missed under pressure.  
-- **Control evidence:** Each entry links to specific controls and follow-ups.  
-- **Detection tuning:** Indicators and root causes feed SIEM/IDS rules and playbooks.  
+- **Control evidence:** Entries connect incident facts with recommended controls and follow-ups.
+- **Detection tuning:** Recorded indicators and causes can inform future SIEM/IDS rules and response procedures.
 - **Growth loop:** Reflections convert mistakes into checklists and training content.
 
-## Reflections
+## Lessons Learned
 - Interpreting subtle phishing indicators and correlating logs was hardest early on. Repetition built speed and accuracy.  
 - Incident response is a lifecycle. Preparation, detection, containment, and recovery are connected.  
 - Lightweight intel tools like VirusTotal accelerate triage and keep analysis grounded.
 
-## Reuse
+## Practical Value
 - Use this journal format for on-call rotations and table-tops.  
 - Convert repeated fixes into **runbooks** and **detections**.  
 - Bring selected entries to interviews to demonstrate method, not just results.
 
----
+<p align="center"><img src="../../divider_wave.svg" alt="" width="100%" /></p>
 
-> **Author:** Komiljon Karimov  
-> **Mission:** Upskilling into Cybersecurity
+> **Author:** Komiljon Karimov<br>
+> **Mission:** Reliable technology and informed security decisions
+
+[Back to portfolio](../../README.md) · [Domain index](../README.md)

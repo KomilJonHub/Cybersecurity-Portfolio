@@ -1,40 +1,46 @@
 <!-- Banner -->
 <p align="center">
-  <img src="./banner_komiljon.svg" alt="Komiljon Karimov — Cybersecurity Portfolio" />
+  <img src="./banner_komiljon.svg" alt="Komiljon Karimov — IT &amp; Cybersecurity Portfolio" width="100%" />
+</p>
+
+# IT & Cybersecurity Portfolio
+
+<p align="center">
+  <a href="https://www.linkedin.com/in/komiljon-karimov"><b>LinkedIn</b></a>
 </p>
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/komiljon-karimov-secops"><b>LinkedIn</b></a>
+  <b>Systems, Networks, Access, and Security Analysis</b><br>
+  Ontario, CA | Inland Empire • Greater Los Angeles • Orange County • Broader opportunities
 </p>
 
 <p align="center">
-  <b>Cybersecurity Analyst | SOC • GRC • Security Operations • IT Support</b><br>
-  Ontario, CA | Inland Empire • Greater Los Angeles • Remote • Open to Relocation
-</p>
-
-<p align="center">
-  I turn noisy logs, risk findings, and technical evidence into clear security actions.
+  I troubleshoot technology, document what I find, and use evidence to make informed security decisions.
 </p>
 
 <p align="center">
   <img src="./divider_wave.svg" alt="Accent divider" />
 </p>
+
+[Capability guide](#capability-guide) · [Featured labs](#featured-labs) · [Full lab index](#full-lab-index-by-domain) · [Credentials](#certifications--training) · [Contact](#contact)
 
 ## About Me
 
-I am Komiljon Karimov, a cybersecurity professional transitioning from engineering, education, and technical consulting into security operations and GRC. I completed the Per Scholas Cybersecurity Program and earned CompTIA CySA+, Splunk Core Certified User, Google Cybersecurity Professional Certificate, and multiple Cisco security/networking badges.
+I am Komiljon Karimov. My background in engineering, teaching, technical consulting, and practical IT support shapes how I work: understand the problem, check the evidence, explain the next step, and document the result.
 
-My portfolio is built to show practical evidence: SIEM searches, packet analysis, risk assessments, system hardening, threat hunting, vulnerability analysis, incident notes, and clear technical documentation. I am currently continuing my cybersecurity and IT apprenticeship-track studies through Riverside City College while preparing for roles where I can contribute immediately and keep growing.
+This portfolio connects reliable systems and networks with appropriate access and informed security decisions. It includes my completed Windows and Linux labs, network investigations, Splunk analysis, risk assessments, and Python work, with source code, documents, and screenshots for readers who want to examine the details.
+
+I completed the Per Scholas Cybersecurity Program and hold CompTIA A+, Security+, CySA+, and Splunk Core Certified User certifications. I am continuing cybersecurity and apprenticeship-related study through Riverside City College and LAUNCH. My ongoing Microsoft SC-900 study supports my longer-term interests in identity and access management (IAM), GRC, and cloud security.
 
 <p align="center">
   <img src="./divider_wave.svg" alt="Accent divider" />
 </p>
 
-## Career Objective
+## Career Direction
 
-Target roles: **SOC Analyst**, **Security Analyst**, **GRC Analyst/Associate**, and **IT Support roles with security responsibilities**.
+I am looking for opportunities to support users, troubleshoot systems and networks, and help teams manage access and technology reliably. I also welcome suitable junior security, risk, and audit opportunities that draw on my analytical work and documentation.
 
-I am especially interested in work involving SIEM monitoring, alert triage, incident documentation, vulnerability management, Windows/Linux hardening, risk assessment, security controls, and clear stakeholder communication.
+I value the daily work of IT support: helping people get back to work, resolving recurring issues, and making technical information easier to use. My security training adds a practical perspective on permissions, configuration, risk, and controls. IAM, GRC, and cloud security are longer-term areas of development; the evidence here shows my current foundation.
 
 <p align="center">
   <img src="./divider_wave.svg" alt="Accent divider" />
@@ -42,50 +48,41 @@ I am especially interested in work involving SIEM monitoring, alert triage, inci
 
 ## Current Highlights
 
-- **CompTIA CySA+ earned** with a score of **811/900**
-- **Splunk Core Certified User** with hands-on SPL, dashboards, alerts, reports, lookups, time-based searches, and statistical processing labs
-- **Google Cybersecurity Professional Certificate** completed
-- **Cisco training and badges** across Network Defense, Endpoint Security, Networking Basics, Operating Systems Basics, and Computer Hardware Basics
-- **22+ hands-on cybersecurity labs** across SIEM, threat hunting, GRC, network security, host hardening, web security, cryptography, and incident response
-- Practical IT/security experience supporting small-business operations, secure access, endpoint protection, VPN basics, credential hygiene, and website administration
+- **Exam certifications:** CompTIA A+, Security+, CySA+, and Splunk Core Certified User
+- **Completed analysis:** Splunk searches and visualizations, packet analysis, threat hunting, vulnerability assessment, and scenario-based risk/control reviews
+- **Systems and access practice:** Linux permissions, Windows/Linux hardening, network discovery, hashing, and encryption
+- **Completed Python project:** a classroom keyboard-monitoring application with a visible interface, session logging, and safe automated validation
+- **Practical staff support:** Windows 10/11, basic Office/Microsoft 365 support, printers, cameras, desktop setup, device connectivity, websites, and basic networking at 4Prep Academy
 
 <details>
-  <summary><b>Open Cybersecurity Profile Map</b></summary>
+  <summary><b>Open IT & Cybersecurity Profile Map</b></summary>
 
 ```mermaid
 mindmap
   root((Komiljon Karimov))
-    Target Roles
-      SOC Analyst
-      Security Analyst
-      GRC Analyst
-      Security-Focused IT Support
-    Certifications
+    Contribution
+      User and desktop support
+      Systems and network troubleshooting
+      Clear technical documentation
+      Evidence-based security decisions
+    Credentials
+      CompTIA A+ and Security+
       CompTIA CySA+
       Splunk Core Certified User
-      Google Cybersecurity Professional Certificate
-      Cisco Network Defense
-      Cisco Endpoint Security
-    Hands-On Evidence
-      22+ Cybersecurity Labs
-      SIEM Analysis with Splunk
-      Network Traffic Analysis with Wireshark
-      Asset Discovery with Nmap
-      Risk Assessment and NIST CSF Mapping
-      Windows and Linux System Hardening
-      Threat Hunting and Incident Documentation
-    Core Strengths
-      Structured Problem Solving
-      Clear Technical Documentation
-      Calm Under Pressure
-      Fast Learning
-      Team-Oriented Execution
-    Current Focus
-      SIEM Monitoring
-      Alert Triage
-      Vulnerability Management
-      Risk Reduction
-      Security Reporting
+      CSAP stackable designation
+      Google and Cisco course credentials
+    Completed Work
+      Linux permissions and system hardening
+      Network discovery and packet analysis
+      Splunk searches and visualizations
+      Risk assessments and control mapping
+      Threat hunting and incident analysis
+      Python classroom application
+    Development
+      Riverside City College and LAUNCH
+      Microsoft SC-900 study
+      Identity and access management
+      GRC and cloud security
 ```
 
 </details>
@@ -94,17 +91,28 @@ mindmap
   <img src="./divider_wave.svg" alt="Accent divider" />
 </p>
 
+## Capability Guide
+
+| Explore | Start here | Evidence and scope |
+|---|---|---|
+| **Systems, networks & troubleshooting** | [System hardening](02_Linux_Windows_Security/Lab03_Performing_System_Hardening) · [Asset discovery](03_Network_Security/Lab01_Asset_Discovery) · [Packet analysis](04_SIEM_Log_Analysis/Lab02_Passive_Scanning_Wireshark) | Lab configuration, command outputs, network observations, and practical troubleshooting reasoning |
+| **Access control & automation** | [Linux permissions](02_Linux_Windows_Security/Lab01_LinuxPermissions) · [File permissions](02_Linux_Windows_Security/Lab04_File_Permissions) · [Python project](07_Scripting_Automation/Python/Keylogger) | Local file access, least-privilege reasoning, application structure, session handling, and tests |
+| **Security analysis, risk & controls** | [Splunk analysis](04_SIEM_Log_Analysis/Lab07_Splunk_Statistical_Processing) · [Botium Toys assessment](01_GRC_Compliance/Lab02_Botium_Toys_Risk_Assessment) · [NIST CSF analysis](01_GRC_Compliance/Lab03_Applying_NIST_CSF) | Completed technical and scenario-based analysis, findings, control gaps, and recommendations |
+
+## Reading the Evidence
+
+Each lab explains its context, the work I completed, the supporting artifacts, and the lessons I took from it. Use the domain indexes for a quick overview, then open the walkthroughs and original screenshots or documents to examine the details. Course-provided scenarios and recommendations are identified where they appear.
+
 ## What This Portfolio Demonstrates
 
 | Area | Evidence Shown |
 |---|---|
-| **Security Operations** | Splunk searches, dashboards, alerts, field extraction, statistical processing, and incident notes |
-| **Network Security** | Wireshark packet analysis, Nmap asset discovery, protocol filtering, basic network mapping |
-| **GRC & Risk** | Risk assessments, NIST CSF mapping, asset inventory, likelihood/impact scoring, control recommendations |
-| **System Hardening** | Linux and Windows baselines, access control, permissions, secure configuration, remediation checklists |
-| **Threat Hunting** | Hypothesis-driven hunts, IOC review, suspicious behavior analysis, findings, and remediation actions |
-| **Incident Response** | Incident handler journals, triage notes, root-cause thinking, lessons learned, and MITRE ATT&CK mapping |
-| **Technical Communication** | Scenario-based README files, clear artifacts, stakeholder-friendly summaries, and recruiter-readable documentation |
+| **Systems & Local Access** | Linux permissions, Windows/Linux configuration, hardening exercises, and access-control analysis |
+| **Networks** | Wireshark packet analysis, Nmap asset discovery, protocol filtering, and network documentation |
+| **Risk & Controls** | Course-based assessments, asset review, NIST CSF mapping, control gaps, and recommendations |
+| **Splunk & Log Analysis** | Searches, dashboards, reports, alerts, field extraction, statistical processing, and incident notes |
+| **Threat & Incident Analysis** | Host observations, IOC review, vulnerability analysis, incident journals, and investigation reasoning |
+| **Scripting & Documentation** | Python source code, synthetic test data, reproducible validation, and step-by-step lab explanations |
 
 <p align="center">
   <img src="./divider_wave.svg" alt="Accent divider" />
@@ -112,33 +120,35 @@ mindmap
 
 ## Portfolio Map
 
-- **01_GRC_Compliance/** — risk assessment, controls, frameworks, policy, ethics
-- **02_Linux_Windows_Security/** — permissions, logging, Linux/Windows hardening, secure baselines
-- **03_Network_Security/** — asset discovery, Nmap, network visibility, diagrams
-- **04_SIEM_Log_Analysis/** — Splunk searches, dashboards, alerts, time analysis, statistics, lookups
-- **05_Incident_Response_Forensics/** — incident notes, triage, documentation, investigation workflow
-- **06_Threat_Intel_Vuln_Analysis/** — threat hunting, IOCs, vulnerability assessment
-- **07_Scripting_Automation/** — Bash, PowerShell, Python, automation practice
-- **08_Web_App_Attacks/** — SQL injection, filtering, input validation concepts
-- **09_Cryptography_Encryption/** — hashing, integrity checks, encryption, OpenSSL practice
+- [**01 — GRC & Compliance**](01_GRC_Compliance) — scenario-based risk assessment, controls, and framework analysis
+- [**02 — Linux & Windows Security**](02_Linux_Windows_Security) — local permissions, logging, and system hardening
+- [**03 — Network Security**](03_Network_Security) — Nmap discovery and network visibility
+- [**04 — SIEM & Log Analysis**](04_SIEM_Log_Analysis) — Splunk, Wireshark, searches, reports, and visualizations
+- [**05 — Incident Response & Forensics**](05_Incident_Response_Forensics) — incident analysis and journal documentation
+- [**06 — Threat Intel & Vulnerability Analysis**](06_Threat_Intel_Vuln_Analysis) — threat hunting and vulnerability assessment
+- [**07 — Scripting & Automation**](07_Scripting_Automation) — completed Python classroom project and validation
+- [**08 — Web Application Security**](08_Web_App_Attacks) — SQL injection and query filtering exercises
+- [**09 — Cryptography & Encryption**](09_Cryptography_Encryption) — hashing, integrity checks, and OpenSSL encryption
 
-> Each major lab is written with a scenario, objectives, tools, steps, artifacts, lessons learned, and security role mapping.
+> Open a domain or expand the full index below to reach the complete collection. Lab pages explain the environment, actions, evidence, and lessons in more detail.
 
 <p align="center">
   <img src="./divider_wave.svg" alt="Accent divider" />
 </p>
 
-## Featured Labs <a id="featured-labs"></a>
+## Featured Labs
 
 | Domain | Lab | What It Shows |
 |---|---|---|
 | **SIEM & Statistical Analysis** | [Splunk Statistical Processing](04_SIEM_Log_Analysis/Lab07_Splunk_Statistical_Processing) | SPL searches, stats/eval transformations, multi-series timecharts, and stakeholder-ready security reporting |
 | **Network & PCAP Analysis** | [Passive Scanning with Wireshark](04_SIEM_Log_Analysis/Lab02_Passive_Scanning_Wireshark) | Packet capture review, protocol filtering, suspicious pattern analysis, and ATT&CK T1040 mapping |
-| **Threat Hunting** | [Threat Hunting Case Study](06_Threat_Intel_Vuln_Analysis/Lab03_Threat_Hunting) | Hunt methodology, custom queries, findings, remediation thinking, and analyst-style documentation |
-| **Risk & GRC** | [Botium Toys Risk Assessment](01_GRC_Compliance/Lab02_Botium_Toys_Risk_Assessment) | Asset inventory, risk matrix, likelihood/impact scoring, control gaps, and practical GRC reporting |
-| **System Hardening** | [Performing System Hardening](02_Linux_Windows_Security/Lab03_Performing_System_Hardening) | Windows/Linux hardening, before/after baselines, remediation checklist, and secure configuration practice |
+| **Threat Hunting** | [Threat Hunting Case Study](06_Threat_Intel_Vuln_Analysis/Lab03_Threat_Hunting) | Host and network observations, investigation hypotheses, findings, and remediation reasoning |
+| **Risk & GRC** | [Botium Toys Risk Assessment](01_GRC_Compliance/Lab02_Botium_Toys_Risk_Assessment) | Scenario scope, supplied risk information, completed control assessment, and recommendations |
+| **System Hardening** | [Performing System Hardening](02_Linux_Windows_Security/Lab03_Performing_System_Hardening) | Windows/Linux configuration, filtering checks, file permissions, and secure configuration practice |
 | **Network Asset Discovery** | [Asset Discovery with Nmap](03_Network_Security/Lab01_Asset_Discovery) | Scan profiles, host identification, network visibility, and simple network documentation |
+| **Python & Application Testing** | [Authorized Keyboard Monitor](07_Scripting_Automation/Python/Keylogger) | Classroom application, visible controls, session files, and safe automated tests |
 
+<a id="full-lab-index-by-domain"></a>
 <details>
   <summary><b>Full Lab Index by Domain</b></summary>
 
@@ -173,7 +183,8 @@ mindmap
 - [Threat Hunting Lab](06_Threat_Intel_Vuln_Analysis/Lab03_Threat_Hunting)
 
 #### 07 — Scripting & Automation
-- Bash, PowerShell, and Python automation practice
+- [Authorized Keyboard Monitor — Python Classroom Project](07_Scripting_Automation/Python/Keylogger)
+- [Scripting & Automation index](07_Scripting_Automation)
 
 #### 08 — Web Application Security
 - [SQL Injection Discovery](08_Web_App_Attacks/Lab01_SQL_Injection)
@@ -191,16 +202,16 @@ mindmap
 
 ## Skills Snapshot
 
-| Category | Tools & Methods |
+| Category | Tools, methods & context |
 |---|---|
-| **SIEM & Detection** | Splunk, SPL, dashboards, alerts, reports, field extraction, regex, `stats`, `eval`, `timechart`, `tstats`, Job Inspector |
-| **Network & PCAP Analysis** | Wireshark, Nmap, TCP/IP, DNS, DHCP, protocol analysis, asset discovery, basic network diagrams |
-| **Operating Systems** | Linux CLI, Windows administration, file permissions, logging, secure baselines, endpoint hardening |
-| **GRC & Compliance** | Risk assessment, asset inventory, NIST CSF, controls mapping, likelihood/impact scoring, policy-aware reporting |
-| **Incident Response** | Alert triage, incident notes, investigation workflow, root-cause analysis, lessons learned, MITRE ATT&CK mapping |
-| **Threat Intel & Vulnerability** | IOC review, threat hunting, vulnerability assessment methodology, remediation recommendations |
-| **Scripting & Automation** | Bash, PowerShell, basic Python, OpenSSL, task automation, repeatable documentation |
-| **IT Support & Administration** | Microsoft 365, Google Workspace, VPN basics, antivirus/firewall rollout, credential hygiene, user support documentation |
+| **IT Support** | Practical Windows 10/11 troubleshooting, basic Office/Microsoft 365 help, printers, cameras, desktop setup, device connections, websites, and basic networking |
+| **Systems & Local Access** | Windows and Linux coursework; Linux CLI, file permissions, access-control reasoning, logging, and lab hardening |
+| **Networks & Packet Analysis** | TCP/IP, DNS, DHCP, Wireshark, Nmap, protocol analysis, asset discovery, and basic network documentation |
+| **Splunk & Log Analysis** | SPL, dashboards, alerts, reports, field extraction, regex, `stats`, `eval`, `timechart`, `tstats`, and Job Inspector |
+| **Risk & Controls** | Scenario-based assessments, asset review, NIST CSF, control mapping, and documented recommendations |
+| **Threat & Incident Analysis** | Lab-based IOC review, threat hunting, vulnerability assessment, incident notes, and investigation workflows |
+| **Python & Technical Documentation** | Classroom application development, event handling, log files, safe unit testing, Git, Markdown, and OpenSSL exercises |
+| **Developing Interests** | IAM and cloud-security foundations through ongoing SC-900 study; GRC through coursework and assessment practice |
 
 <p align="center">
   <img src="./divider_wave.svg" alt="Accent divider" />
@@ -231,43 +242,47 @@ mindmap
 
 ## Certifications & Training
 
-<p>
-  <a href="https://www.credly.com/badges/5063126d-1473-4080-b66d-defb68bfd79d/public_url">
-    <img alt="CompTIA CySA+" title="CompTIA CySA+" src="https://img.shields.io/badge/CompTIA_CySA%2B-0F172A?style=for-the-badge&logo=comptia&logoColor=E2E8F0" />
-  </a>
-  <a href="https://www.credly.com/badges/3b81da01-92b6-4852-9dfb-de2b85c4f9bd/public_url">
-    <img alt="Splunk Core Certified User" title="Splunk Core Certified User" src="https://img.shields.io/badge/Splunk_Core_Certified_User-0F172A?style=for-the-badge&logo=splunk&logoColor=E2E8F0" />
-  </a>
-  <a href="https://www.credly.com/badges/4be7998b-7d20-4acf-be55-59730f2e40db/public_url">
-    <img alt="Google Cybersecurity Professional Certificate" title="Google Cybersecurity Professional Certificate" src="https://img.shields.io/badge/Google_Cybersecurity_Certificate-0F172A?style=for-the-badge&logo=google&logoColor=E2E8F0" />
-  </a>
-</p>
-
-**Cisco Badges**
+### Exam-based certifications
 
 <p>
-  <a href="https://www.credly.com/badges/f5c4561c-3858-45b2-9bbb-fc57d9a7c625/public_url">
-    <img alt="Cisco Network Defense" title="Cisco Network Defense" src="https://img.shields.io/badge/Cisco_Network_Defense-0F172A?style=for-the-badge&logo=cisco&logoColor=1BA0D7" />
-  </a>
-  <a href="https://www.credly.com/badges/2e9c5252-f656-411d-ae2e-85c17c91897d/public_url">
-    <img alt="Cisco Endpoint Security" title="Cisco Endpoint Security" src="https://img.shields.io/badge/Cisco_Endpoint_Security-0F172A?style=for-the-badge&logo=cisco&logoColor=22D3EE" />
-  </a>
-  <a href="https://www.credly.com/badges/187e06f9-f40b-4b42-a1f4-c68c311dcd9d/public_url">
-    <img alt="Cisco Networking Basics" title="Cisco Networking Basics" src="https://img.shields.io/badge/Cisco_Networking_Basics-0F172A?style=for-the-badge&logo=cisco&logoColor=60A5FA" />
-  </a>
-  <a href="https://www.credly.com/badges/c88b90ff-e392-481c-ba2e-5c993ed146a8/public_url">
-    <img alt="Cisco Operating Systems Basics" title="Cisco Operating Systems Basics" src="https://img.shields.io/badge/Cisco_OS_Basics-0F172A?style=for-the-badge&logo=cisco&logoColor=A78BFA" />
-  </a>
-  <a href="https://www.credly.com/badges/e43cf92b-af53-4093-9087-4ebee647ddb3/public_url">
-    <img alt="Cisco Computer Hardware Basics" title="Cisco Computer Hardware Basics" src="https://img.shields.io/badge/Cisco_Hardware_Basics-0F172A?style=for-the-badge&logo=cisco&logoColor=E2E8F0" />
-  </a>
+  <a href="https://www.credly.com/users/komiljon-karimov"><img alt="CompTIA A+ — Credly profile" title="CompTIA A+ — Credly profile" height="28" src="https://img.shields.io/badge/CompTIA_A%2B-0F172A?style=for-the-badge&amp;logo=comptia&amp;logoColor=E2E8F0" /></a>
+  <a href="https://www.credly.com/users/komiljon-karimov"><img alt="CompTIA Security+ — Credly profile" title="CompTIA Security+ — Credly profile" height="28" src="https://img.shields.io/badge/CompTIA_Security%2B-0F172A?style=for-the-badge&amp;logo=comptia&amp;logoColor=E2E8F0" /></a>
+  <a href="https://www.credly.com/badges/5063126d-1473-4080-b66d-defb68bfd79d/public_url"><img alt="CompTIA CySA+" title="CompTIA CySA+" height="28" src="https://img.shields.io/badge/CompTIA_CySA%2B-0F172A?style=for-the-badge&amp;logo=comptia&amp;logoColor=E2E8F0" /></a>
+  <a href="https://www.credly.com/badges/3b81da01-92b6-4852-9dfb-de2b85c4f9bd/public_url"><img alt="Splunk Core Certified User" title="Splunk Core Certified User" height="28" src="https://img.shields.io/badge/Splunk_Core_Certified_User-0F172A?style=for-the-badge&amp;logo=splunk&amp;logoColor=E2E8F0" /></a>
 </p>
 
-**Additional Training**
+### Stackable designation
 
-- Per Scholas Cybersecurity Program — Los Angeles, CA | Completed October 2025
-- Riverside City College CE740 Cybersecurity / Apprenticeship Track — 2026
-- CompTIA A+ preparation through CIS coursework and Cisco IT Essentials 8
+<p>
+  <a href="https://www.credly.com/users/komiljon-karimov"><img alt="CompTIA Security Analytics Professional (CSAP) — Credly profile" title="CompTIA Security Analytics Professional (CSAP) — Credly profile" height="28" src="https://img.shields.io/badge/CompTIA_CSAP-0F172A?style=for-the-badge&amp;logo=comptia&amp;logoColor=E2E8F0" /></a>
+</p>
+
+CSAP is a **stackable designation** based on qualifying CompTIA certifications, rather than a separately passed exam.
+
+### Professional course certificate
+
+<p>
+  <a href="https://www.credly.com/badges/4be7998b-7d20-4acf-be55-59730f2e40db/public_url"><img alt="Google Cybersecurity Professional Certificate V2" title="Google Cybersecurity Professional Certificate V2" height="28" src="https://img.shields.io/badge/Google_Cybersecurity_V2-0F172A?style=for-the-badge&amp;logo=google&amp;logoColor=E2E8F0" /></a>
+</p>
+
+### Cisco course-completion credentials
+
+<p>
+  <a href="https://www.credly.com/users/komiljon-karimov"><img alt="Cisco IT Essentials — Credly profile" title="Cisco IT Essentials — Credly profile" height="28" src="https://img.shields.io/badge/Cisco_IT_Essentials-0F172A?style=for-the-badge&amp;logo=cisco&amp;logoColor=1BA0D7" /></a>
+  <a href="https://www.credly.com/badges/2e9c5252-f656-411d-ae2e-85c17c91897d/public_url"><img alt="Cisco Endpoint Security" title="Cisco Endpoint Security" height="28" src="https://img.shields.io/badge/Cisco_Endpoint_Security-0F172A?style=for-the-badge&amp;logo=cisco&amp;logoColor=22D3EE" /></a>
+  <a href="https://www.credly.com/badges/f5c4561c-3858-45b2-9bbb-fc57d9a7c625/public_url"><img alt="Cisco Network Defense" title="Cisco Network Defense" height="28" src="https://img.shields.io/badge/Cisco_Network_Defense-0F172A?style=for-the-badge&amp;logo=cisco&amp;logoColor=1BA0D7" /></a>
+  <a href="https://www.credly.com/badges/187e06f9-f40b-4b42-a1f4-c68c311dcd9d/public_url"><img alt="Cisco Networking Basics" title="Cisco Networking Basics" height="28" src="https://img.shields.io/badge/Cisco_Networking_Basics-0F172A?style=for-the-badge&amp;logo=cisco&amp;logoColor=60A5FA" /></a>
+  <a href="https://www.credly.com/badges/c88b90ff-e392-481c-ba2e-5c993ed146a8/public_url"><img alt="Cisco Operating Systems Basics" title="Cisco Operating Systems Basics" height="28" src="https://img.shields.io/badge/Cisco_Operating_Systems_Basics-0F172A?style=for-the-badge&amp;logo=cisco&amp;logoColor=A78BFA" /></a>
+  <a href="https://www.credly.com/badges/e43cf92b-af53-4093-9087-4ebee647ddb3/public_url"><img alt="Cisco Computer Hardware Basics" title="Cisco Computer Hardware Basics" height="28" src="https://img.shields.io/badge/Cisco_Computer_Hardware_Basics-0F172A?style=for-the-badge&amp;logo=cisco&amp;logoColor=E2E8F0" /></a>
+</p>
+
+**Credential links:** The A+, Security+, CSAP, and IT Essentials badges currently open my general [Credly profile](https://www.credly.com/users/komiljon-karimov), rather than individual issuance pages. The other badges retain their existing individual links.
+
+### Education & ongoing study
+
+- **Per Scholas Cybersecurity Program** — completed
+- **Riverside City College and LAUNCH** — continuing cybersecurity and apprenticeship-related study
+- **Microsoft SC-900** — study in progress
 
 <p align="center">
   <img src="./divider_wave.svg" alt="Accent divider" />
@@ -275,9 +290,9 @@ mindmap
 
 ## Professional Background
 
-Before cybersecurity, I built a foundation in engineering, education, IT support, and technical consulting. That background helps me communicate clearly, document carefully, stay calm under pressure, and connect technical work to business risk.
+My experience spans engineering, teaching, technical consulting, and practical IT support. I hold a master's degree in Power Supply Engineering and a bachelor's degree in Electromechanics. That foundation helps me break down problems, explain technical choices, and connect detailed work to the needs of the people using a system.
 
-Recent work includes supporting secure small-business operations at 4Prep Academy: website administration, access management, basic VPN setup, antivirus/firewall rollout, device hardening, credential hygiene, documentation, and practical troubleshooting for users and systems.
+At **4Prep Academy**, I provided primarily internal staff support, largely on a volunteer basis. I helped with Windows 10/11 troubleshooting, basic Office/Microsoft 365 questions, printers, cameras, desktop setup, connecting phones and computers, website setup and maintenance, internal communication tools, and basic networking. This work required patience, clear explanations, and practical problem solving.
 
 <p align="center">
   <img src="./divider_wave.svg" alt="Accent divider" />
@@ -285,15 +300,11 @@ Recent work includes supporting secure small-business operations at 4Prep Academ
 
 ## Current Focus
 
-I am strengthening my readiness for SOC, GRC, and security-focused IT roles by focusing on:
-
-- SIEM monitoring, alert triage, and incident documentation
-- Windows/Linux administration and endpoint hardening
-- Networking fundamentals, packet analysis, and asset discovery
-- Vulnerability management and remediation prioritization
-- Risk assessment, NIST CSF, and security control mapping
-- Ticket-style documentation and clear security reporting
-- CompTIA A+ foundation review to support IT/security hybrid roles
+- Continuing cybersecurity and apprenticeship-related study through **Riverside City College and LAUNCH**, including Windows, Linux, Python, networking, Splunk, and security analysis
+- Building on my systems and networking foundation through troubleshooting and clear technical documentation
+- Studying **Microsoft SC-900** and developing my understanding of identity, access, and cloud-security concepts
+- Connecting risk assessments and control recommendations to technical evidence and business needs
+- Maintaining the completed labs and Python project so their explanations, artifacts, and validation remain useful
 
 <p align="center">
   <img src="./divider_wave.svg" alt="Accent divider" />
@@ -301,10 +312,15 @@ I am strengthening my readiness for SOC, GRC, and security-focused IT roles by f
 
 ## Contact
 
-If you are hiring for an entry-level SOC, Security Analyst, GRC, or IT Support role with security responsibilities, I am ready to contribute, learn quickly, and bring disciplined documentation to the team.
+If your team needs someone who can support users, troubleshoot methodically, and document technical and security findings clearly, I would welcome a conversation. I am based in Ontario, California, and consider opportunities across the Inland Empire, Greater Los Angeles, Orange County, and suitable broader locations.
 
 <p align="center">
-  <a href="https://www.linkedin.com/in/komiljon-karimov-secops"><b>Connect with me on LinkedIn</b></a>
+  <a href="https://www.linkedin.com/in/komiljon-karimov"><b>Connect with me on LinkedIn</b></a>
 </p>
 
-© 2026 Komiljon Karimov — Cybersecurity Portfolio. Viewing and linking permitted. Reuse or derivatives require written permission.
+<p align="center"><img src="divider_wave.svg" alt="" width="100%" /></p>
+
+> **Author:** Komiljon Karimov<br>
+> **Mission:** Reliable technology and informed security decisions
+
+© 2026 Komiljon Karimov — IT & Cybersecurity Portfolio. Viewing and linking permitted. Reuse or derivatives require written permission.

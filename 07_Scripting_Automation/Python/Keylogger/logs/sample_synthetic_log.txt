@@ -1,0 +1,5 @@
+# Synthetic demonstration data only — no real keystrokes or credentials.
+# Example keyboard-monitoring session for portfolio documentation.
+[2026-07-21 12:00:00] Session started (authorized demo)
+[2026-07-21 12:00:01] Sample input: hello demo
+[2026-07-21 12:00:02] Session stopped

@@ -1,10 +1,13 @@
-
 # Lab: Splunk Visualizations — Turning Data into Insight
 
-## Scenario Overview
+[Portfolio](../../README.md) / [SIEM & Log Analysis](../README.md)
+
+[Overview](#overview) · [Objectives](#objectives) · [Environment & Tools](#environment--tools) · [What I Did](#what-i-did) · [Lessons Learned](#lessons-learned) · [Evidence & Results](#evidence--results) · [Practical Value](#practical-value)
+
+## Overview
 I worked on this visualization lab as part of my Splunk Power User certification prep to gain hands-on experience turning raw log data into actionable insights. The scenario placed me in the role of a SOC analyst at **Buttercup Games**, responsible for making complex datasets readable and usable during a high-traffic sales period.
 
-In this setup, I had to compare e-commerce web sales against vendor transactions, track failed login trends across Linux servers, and highlight risky network activity in proxy and access logs. The goal was to practice building timecharts, single-value panels, and geographic maps that transform noise into clear visuals. These visualizations allow different teams—business, operations, and security—to understand key patterns at a glance and respond quickly.y city. The goal was simple: build visuals that carry their own context so the next analyst can open the report, glance, and act.
+In this setup, I had to compare e-commerce web sales against vendor transactions, track failed login trends across Linux servers, and highlight risky network activity in proxy and access logs. The goal was to practice building timecharts, single-value panels, and geographic maps that transform noise into clear visuals. These visualizations allow different teams—business, operations, and security—to understand key patterns at a glance and review results with clear context.
 
 ---
 
@@ -60,7 +63,7 @@ index=security sourcetype=linux_secure fail*
 | trendline sma2(failures) as trend
 ```
 Line chart with 7 days of login failures plus a smoothed trendline.  
-![L1S3](./screenshots/Screenshot%202025-09-27%20133437.png)
+![L1S3](./screenshots/Screenshot%202025-09-27%20133900.png)
 
 ---
 
@@ -70,13 +73,13 @@ index=sales sourcetype=vendor_sales categoryId="STRATEGY"
 | timechart count span=1d
 ```
 Daily sales trend for strategy games.  
-![L1S4](./screenshots/Screenshot%202025-09-27%20133900.png)
+![L1S4](./screenshots/Screenshot%202025-09-27%20135447.png)
 
 ---
 
 ### L1S5 — Single value visualization
 Same data as L1S4 but displayed as **Single Value** with delta from previous day.  
-![L1S5](./screenshots/Screenshot%202025-09-27%20135447.png)
+![L1S5](./screenshots/Screenshot%202025-09-27%20140003.png)
 
 ---
 
@@ -87,7 +90,7 @@ index=web sourcetype=access_combined action=purchase status=200 sale_price=*
 | geostats count by product_name globallimit=0
 ```
 Cluster map showing purchases by geolocation.  
-![L1S6](./screenshots/Screenshot%202025-09-27%20140003.png)
+![L1S6](./screenshots/Screenshot%202025-09-27%20143752.png)
 
 ---
 
@@ -98,7 +101,7 @@ index=sales sourcetype=vendor_sales
 | appendpipe [ stats sum("Retail Events") as "Retail Events" | eval VendorCountry="Total" ]
 ```
 Added a total row at the bottom.  
-![L1S7](./screenshots/Screenshot%202025-09-27%20143752.png)
+![L1S7](./screenshots/Screenshot%202025-09-27%20150723.png)
 
 ---
 
@@ -110,7 +113,7 @@ index=network sourcetype=cisco_wsa_squid usage!=Business
 | chart count over location by usage
 ```
 Split by location → trellis pie charts (Boston, London, San Francisco).  
-![LX1](./screenshots/Screenshot%202025-09-27%20142413.png)
+![LX1](./screenshots/Screenshot%202025-09-27%20151659.png)
 
 ---
 
@@ -121,7 +124,7 @@ index=security sourcetype=history_access Address_Description="San Francisco"
 | stats count
 ```
 Displayed as a filler gauge showing count of distinct RFID badges used.  
-![LX2](./screenshots/Screenshot%202025-09-27%20150723.png)
+![LX2](./screenshots/Screenshot%202025-09-27%20152958.png)
 
 ---
 
@@ -133,43 +136,44 @@ index=games sourcetype=SimCubeBeta earliest=-30d@d latest=now
 | geom geo_countries featureIdField=Country
 ```
 Choropleth map showing worldwide distribution of game events.  
-![LX3](./screenshots/Screenshot%202025-09-27%20151659.png)
-
----
-
-## Artifacts
-- [Lab Guide PDF](./artifacts/Splunk%20lab4.pdf)  
+![LX3](./screenshots/Screenshot%202025-09-27%20154212.png)
 
 ---
 
 ## Lessons Learned
-- **Field renaming** (e.g., retailSales vs. webSales) improves readability in charts.  
-- **Trendlines** quickly show direction of metrics without overloading managers.  
-- **Single Value & Gauge visualizations** highlight key figures at a glance.  
-- **Maps** provide immediate context for geographic patterns of users or sales.  
-- Trellis layouts are powerful for side-by-side regional comparisons.  
 
----
-
-## Lessons Learned
-This lab reinforced how visualization amplifies the value of search results. I learned how to:
-
-- Use `timechart`, `trendline`, and `single-value` panels to highlight shifts and anomalies over time.  
-- Rename technical fields into business-friendly labels so reports make sense outside the SOC.  
-- Apply Trellis layouts and pie charts to split data by location or category for faster pattern recognition.  
-- Leverage `iplocation`, `geostats`, and `geom` for mapping, turning raw IPs into geographic insights.  
-- Balance detail and clarity—too much data confuses, but the right visualization points to action immediately.  
-
-**Takeaway:** Effective SOC visualizations aren’t about fancy charts—they’re about making data readable in seconds. A good panel answers the core question fast, helps non-technical teams act, and leaves behind a reliable report for the next analyst on shift.  ---
+- **Field renaming** makes chart series and tables easier to understand.
+- **Trendlines** help summarize changes while the underlying counts remain available for review.
+- **Single values and gauges** need a labelled metric, time range, and useful comparison.
+- **Trellis layouts** make regional category distributions easier to compare.
+- **Maps** add geographic context, but an IP-derived location is an approximation.
+- Choosing a visualization starts with the question: a count of purchase events, revenue, and distinct users are different measures.
 
 ## MITRE ATT&CK Mapping
-These visualizations support detections in:  
-- **T1078 – Valid Accounts**: Monitoring login failures over time (L1S3).  
-- **T1190 – Exploit Public-Facing Application**: Purchase events could highlight abuse patterns in retail (L1S1–L1S2).  
-- **T1071.001 – Application Layer Protocol: Web Protocols**: Web and proxy usage patterns (LX1).  
-- **T1036 – Masquerading**: Geographic distribution checks can reveal anomalies in user logins (LX3).
 
----
+These are visualization and analysis exercises. Authentication trends and proxy patterns can support a later investigation, but the displayed sales, geographic, and usage charts do not establish an ATT&CK technique by themselves.
 
-> **Author:** Komiljon Karimov  
-> **Mission:** Upskilling into Cybersecurity
+## Evidence & Results
+
+The [lab guide](artifacts/Splunk%20lab4.pdf) supplies the scenarios and dataset. The task screenshots above document the completed visualizations. Additional original evidence shows the intermediate table views, US-state map exercise, and saved reports:
+
+<details>
+<summary>Open intermediate tables, map exercise, and report index</summary>
+
+![Linux authentication failure counts before adding the trendline](screenshots/Screenshot%202025-09-27%20133437.png)
+![US state geometry table](screenshots/Screenshot%202025-09-27%20141935.png)
+![US state choropleth map](screenshots/Screenshot%202025-09-27%20142413.png)
+![Saved reports including completed exercises](screenshots/Screenshot%202025-09-27%20154607.png)
+
+</details>
+
+## Practical Value
+
+I practiced selecting and labelling visualizations so another person can inspect the underlying data, compare periods or locations, and understand the measure being presented.
+
+<p align="center"><img src="../../divider_wave.svg" alt="" width="100%" /></p>
+
+> **Author:** Komiljon Karimov<br>
+> **Mission:** Reliable technology and informed security decisions
+
+[Back to portfolio](../../README.md) · [Domain index](../README.md)

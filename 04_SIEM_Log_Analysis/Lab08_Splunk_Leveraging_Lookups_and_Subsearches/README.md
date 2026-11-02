@@ -1,5 +1,9 @@
 # Lab 08 — Splunk: Leveraging Lookups and Subsearches
 
+[Portfolio](../../README.md) / [SIEM & Log Analysis](../README.md)
+
+[Objectives](#objectives) · [Environment & Tools](#environment--tools) · [What I Did](#what-i-did) · [Lessons Learned](#lessons-learned) · [Evidence & Results](#evidence--results)
+
 In this lab I used **lookups** and **subsearches** to enrich raw logs, tighten my searches, and ship results that non-technical teams can act on. I verified lookup contents, joined context into events, saved a curated dataset back to a CSV lookup, drew a revenue map, and filtered product activity with a lookup-driven subsearch.
 
 
@@ -13,7 +17,7 @@ In this lab I used **lookups** and **subsearches** to enrich raw logs, tighten m
 
 ---
 
-## Environment & Data
+## Environment & Tools
 
 - **Splunk Enterprise** → *Search & Reporting*
 - **Indexes:** `web`, `network`, `sales`
@@ -45,12 +49,12 @@ In this lab I used **lookups** and **subsearches** to enrich raw logs, tighten m
 
 ### L1S2 — Enrich non-200 responses with readable status and type
 
-**Scenario.** Ops wanted a breakdown of **client vs server errors** per web host.
+**Scenario.** Ops wanted labelled counts of **non-200 responses** per web host. Depending on the dataset, `status!=200` can include successful or redirect statuses as well as errors.
 
 **SPL**
 ```spl
 index=web sourcetype=access_* status!=200
-| lookup status_definitions.csv status OUTPUT status_description status_type
+| lookup status_definitions_lookup status OUTPUT status_description status_type
 | stats count by host status_description status_type
 ```
 
@@ -70,8 +74,8 @@ index=web sourcetype=access_* status!=200
 **SPL**
 ```spl
 index=network sourcetype=cisco_wsa_squid x_webcat_code_full="Uncategorized URLs"
-| lookup knownusers.csv user AS username OUTPUT user dept
-| lookup status_definitions.csv status OUTPUT status_description
+| lookup knownusers.csv user AS username OUTPUT user
+| lookup status_definitions_lookup status OUTPUT status_description
 | search user=*
 | table user dept cs_url status status_description
 ```
@@ -102,6 +106,7 @@ index=sales sourcetype=vendor_sales VendorCountry=Canada
 ![L1S4](./screenshots/Screenshot%202025-10-04%20234813.png)
 
 **Takeaways.**
+- The **1.31** conversion factor is supplied by the historical exercise, rather than a current exchange rate.
 - `geom … featureIdField=` binds your stats to a geography lookup.
 - Convert currency before drawing so legends match business units.
 
@@ -114,7 +119,7 @@ index=sales sourcetype=vendor_sales VendorCountry=Canada
 **SPL**
 ```spl
 index=web sourcetype=access_combined status!=200 referer_domain="http://www.buttercupgames.com"
-| lookup status_definitions.csv status OUTPUT status_description status_type
+| lookup status_definitions_lookup status OUTPUT status_description status_type
 | stats count by clientip host status_description status_type
 | stats list(status_description) AS status_description list(status_type) AS status_type \
         list(host) AS host sum(count) AS count BY clientip
@@ -126,7 +131,7 @@ index=web sourcetype=access_combined status!=200 referer_domain="http://www.butt
 
 **Takeaways.**
 - `outputlookup` converts a one-off hunt into a data asset other teams can reuse.
-- Rolling this into a dashboard panel is a trivial next step.
+- The saved lookup provides an input for a follow-up report or dashboard.
 
 ---
 
@@ -146,7 +151,7 @@ index=web sourcetype=access_combined action="view" earliest=@w6 latest=@w7
 | sort -viewed
 ```
 
-**Result.** Ranked list of multiplayer titles by views.  
+**Result.** Ranked list of multiplayer titles by views. The screenshot resolves the Saturday-to-Sunday boundary to October 4–5, 2025; relative boundaries resolve differently when rerun later.<br>
 ![L2S1](./screenshots/Screenshot%202025-10-05%20152145.png)
 
 **Takeaways.**
@@ -172,7 +177,7 @@ index=web sourcetype=access_combined action="view" earliest=@w6 latest=@w7
 
 - **Trust, then join.** `inputlookup` first; never assume lookup shape.
 - **Align names early.** `AS` and `OUTPUT` avoid messy downstream renames.
-- **Persist value.** `outputlookup` is the fastest path from hunt → dashboard.
+- **Persist deliberately.** `outputlookup` saves reusable results; permissions and overwrite behavior need review.
 - **Subsearch = scope.** Use it to define *who/what*, then measure in the outer search.
 - **Table the story.** `table` and concise labels reduce cognitive load for stakeholders.
 
@@ -186,12 +191,15 @@ Lookups felt like bridges—connecting logs to the language teams already use. I
 
 ## MITRE ATT&CK Mapping
 
-This lab builds **enrichment and scoping** capabilities that support detections rather than targeting a single technique. Relevant surfaces:
+This lab develops enrichment and scoping methods for web, proxy, and authentication analysis. Technique-specific detections would require additional logic, context, and validation beyond these reporting exercises.
 
-- **Data Sources:** Web server, Web proxy, Application, Authentication
-- **Supports work against:** Initial Access, Command and Control, Exfiltration patterns via web activity baselining and error analysis
+## Evidence & Results
 
----
+The [course guide](artifacts/Splunk%20lab7.pdf) supplies the scenarios and lookup requirements. The six screenshots and report index above document my completed lookup inspection, enrichment, map, CSV output, and subsearch work.
 
-> **Author:** Komiljon Karimov  
-> **Mission:** Upskilling into Cybersecurity
+<p align="center"><img src="../../divider_wave.svg" alt="" width="100%" /></p>
+
+> **Author:** Komiljon Karimov<br>
+> **Mission:** Reliable technology and informed security decisions
+
+[Back to portfolio](../../README.md) · [Domain index](../README.md)

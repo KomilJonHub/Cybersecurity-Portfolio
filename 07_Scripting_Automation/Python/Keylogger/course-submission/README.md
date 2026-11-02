@@ -1,5 +1,6 @@
-
 # CIS-30A Course Submission: Keyboard Logger
+
+[Portfolio](../../../../README.md) / [Scripting & Automation](../../../README.md)
 
 This folder contains the version of my keyboard logger project that I prepared for the CIS-30A course submission. It focuses on the Python concepts and technical requirements listed in the project rubric.
 
@@ -157,4 +158,11 @@ Possible future improvements include:
 
 This is the simplified version that I prepared for my CIS-30A course submission.
 
-The parent `Keylogger` folder contains the extended portfolio version with additional development materials and features developed leveraging more AI.
+The parent `Keylogger` folder contains the extended portfolio version, with additional development materials and features developed with AI assistance.
+
+<p align="center"><img src="../../../../divider_wave.svg" alt="" width="100%" /></p>
+
+> **Author:** Komiljon Karimov<br>
+> **Mission:** Reliable technology and informed security decisions
+
+[Back to portfolio](../../../../README.md) · [Domain index](../../../README.md)

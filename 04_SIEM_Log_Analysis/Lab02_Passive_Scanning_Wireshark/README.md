@@ -1,99 +1,109 @@
-# Lab 02: Passive Scanning with Wireshark
+# Lab 02 — Passive Traffic Analysis with Wireshark
 
-> In this lab, I used **Wireshark** to perform passive vulnerability scanning by capturing ICMP and SSH traffic.  
-> I identified plaintext vs encrypted communications, determined operating system fingerprints from packet payloads, and analyzed SSH protocol details.  
-> This simulates the tasks of a SOC analyst when monitoring traffic for vulnerabilities and policy compliance.
+[Portfolio](../../README.md) / [SIEM & Log Analysis](../README.md)
 
-##  Objective
-The goal of this lab was to use Wireshark as a **passive network analysis tool** to:  
-- Capture and filter network traffic.  
-- Inspect ICMP traffic to detect blocked traffic and identify OS types.  
-- Differentiate plaintext vs encrypted communication.  
-- Identify client and server software versions from SSH traffic.  
+[Overview](#overview) · [Objectives](#objectives) · [Environment & Tools](#environment--tools) · [What I Did](#what-i-did) · [Evidence & Results](#evidence--results) · [Lessons Learned](#lessons-learned) · [Practical Value](#practical-value)
 
-##  Tools Used
-- **Kali Linux VM** (running Wireshark)  
-- **Windows DC10 VM** (for generating ICMP and SSH traffic)  
-- **PuTTY** (for SSH client)  
-- **Wireshark v4.0.x**  
+## Overview
 
-## Lab Environment Setup
+I used Wireshark in a controlled Windows/Linux lab to inspect ICMP and SSH traffic. I generated ping and SSH traffic, checked the effect of an inbound firewall rule, compared visible ping payloads, and inspected SSH version and algorithm information. Wireshark captured the traffic passively; generating the demonstration traffic was an active part of the exercise.
 
-This directory includes a Vagrantfile that provisions a Kali VM and a Windows VM on a private network for traffic capture.
+## Objectives
 
-### Build & Run
+- Capture traffic and apply display filters.
+- Compare successful and unanswered ICMP echo requests.
+- Read payload patterns as host-behavior clues.
+- Identify SSH software banners and distinguish cleartext setup metadata from encrypted session traffic.
+
+## Environment & Tools
+
+- **Kali Linux VM:** Wireshark 4.0.x, terminal, and OpenSSH server
+- **DC10 Windows VM:** command prompt, Windows Firewall, and PuTTY client
+- **Recorded lab addresses:** Kali `10.1.16.66`; DC10 `10.1.16.1`
+
+### Optional Local VM Definition
+
+The included [Vagrantfile](Vagrantfile) defines Kali and Windows machines on `192.168.56.10` and `192.168.56.11`. It is a starting VM definition, separate from the recorded training network. It does not install the full course environment or configure the SSH service and firewall exercise.
 
 ```bash
 vagrant up
 ```
 
-Access Kali with `vagrant ssh kali` and access Windows via RDP at `192.168.56.11`.
+Reproducing the exercise locally requires the appropriate virtualization provider, available box images, configured services, and commands adjusted for the local addresses. I have preserved the original recorded environment in the walkthrough below.
 
+## What I Did
 
-##  Key Steps Performed
+### 1. Start the Capture
 
-1. **Launching Wireshark and Starting Capture**  
-   - Opened Wireshark on Kali, selected `eth0` interface, and started packet capture.  
-   - Verified three-pane layout for packet list, details, and bytes.  
-   ![Wireshark Start](./screenshots/2.png)  
+I opened Wireshark on Kali, selected `eth0`, and inspected the packet list, protocol details, and bytes panes.
 
-2. **ICMP Traffic Analysis**  
-   - Sent ping requests from Kali to DC10 (`ping 10.1.16.1 -c 4`).  
-   - Captured packets showed ICMP echo requests and replies with payload visible in plaintext.  
-   ![ICMP Capture](./screenshots/1.png)  
-   ![ICMP Payload](./screenshots/8.png)  
+![Wireshark start screen and available interfaces](screenshots/1.png)
+![Live eth0 capture with packet list, details, and bytes](screenshots/2.png)
 
-3. **Firewall Blocking ICMP**  
-   - On DC10, applied a Windows firewall rule to block inbound ICMP.  
-   - Verified packet loss (`100% packet loss`) in Kali and ICMP requests with no replies in Wireshark.  
-   ![Windows Firewall Rule](./screenshots/5.png)  
-   ![Ping Failure](./screenshots/7.png)  
+### 2. Check ICMP Connectivity and Filtering
 
-4. **OS Identification via ICMP Payload**  
-   - Observed ICMP payload differences:  
-     - Windows used `abcdefghijklmnopqrstuvwabcdefghi`.  
-     - Linux used ASCII symbols/numbers.  
-   - Used packet size (32 vs 48 bytes) as another OS indicator.  
-   ![OS Detection via ICMP](./screenshots/10.png)  
+I sent four echo requests from Kali to DC10 and initially received four replies. On DC10, I added an inbound ICMPv4 echo-request block rule. The same Windows screenshot also shows successful ping in the opposite direction, from DC10 to Kali.
 
-5. **SSH Traffic Analysis**  
-   - Connected from DC10 → Kali using PuTTY (client) and OpenSSH (server).  
-   - Captured SSH handshake packets.  
-   - Verified protocol version and software:  
-     - Client: `SSH-2.0-PuTTY_Release_0.77`  
-     - Server: `SSH-2.0-OpenSSH_9.1p1 Debian-1`  
-   ![SSH Client Version](./screenshots/9.png)  
-   ![SSH Server Version](./screenshots/12.png)  
+![Successful Kali-to-DC10 ping before the rule](screenshots/3.png)
+![DC10 inbound echo block rule and successful reverse-direction ping](screenshots/4.png)
 
-6. **Encryption Detection**  
-   - Inspected SSH session setup (Key Exchange, Diffie-Hellman, AES-256-CTR, HMAC-SHA2-256).  
-   - Confirmed that post-handshake payloads were unreadable in ASCII (encrypted).  
-   ![Encrypted SSH Traffic](./screenshots/11.png)  
+When I repeated the Kali-to-DC10 test, the terminal showed 100% packet loss. I used an ICMP display filter to review the related capture. The filtered view also includes ICMP destination-unreachable messages relating to other traffic, so each message needs to be interpreted by type and direction.
+
+![Kali-to-DC10 ping with no replies after the inbound rule](screenshots/6.png)
+![ICMP-filtered capture including destination-unreachable messages](screenshots/7.png)
+
+This check established the intended echo-filtering result in that lab configuration. A timeout by itself can also have other causes, so I correlated the command, rule change, and traffic direction.
+
+### 3. Compare Ping Payload Patterns
+
+I compared the visible payloads generated by the two ping utilities:
+
+- Kali's captured echo payload contains timestamp data and a 48-byte data section.
+- Windows' captured echo payload contains a 32-byte alphabetic pattern.
+
+![Kali-generated ICMP echo payload and data length](screenshots/8.png)
+![Windows-generated ICMP echo payload and alphabetic pattern](screenshots/9.png)
+
+These are useful hints about the generating utility in this exercise. Payloads and packet sizes are configurable, so they do not uniquely identify an operating system.
+
+### 4. Inspect SSH Setup and Encryption Metadata
+
+I used PuTTY on DC10 to connect to Kali over SSH.
+
+![PuTTY SSH connection configuration targeting Kali](screenshots/5.png)
+
+The capture identifies the PuTTY client and OpenSSH server software banners. SSH exposes this setup metadata before encrypted session traffic begins.
+
+![Server software banner: OpenSSH_9.1p1 Debian-1](screenshots/11.png)
+![PuTTY client banner and client key-exchange proposal](screenshots/12.png)
+
+I also inspected SSHv2 packets labelled with `aes256-ctr` encryption, `hmac-sha2-256`, and no compression. The key-exchange proposal lists offered algorithms; that list and an encrypted packet carry different kinds of information.
+
+![SSHv2 packet with encryption and MAC information](screenshots/10.png)
+
+## Evidence & Results
+
+All 12 original images remain available in [screenshots/](screenshots/). They document the capture interface, before/after ping behavior, the firewall command, payload patterns, PuTTY setup, and SSH protocol details.
 
 ## MITRE ATT&CK Mapping
-- [T1040: Network Sniffing](https://attack.mitre.org/techniques/T1040/)
 
-##  Screenshots
-All supporting evidence is saved in the [`screenshots/`](./screenshots/) folder.  
-The 12 images highlight:  
-- ICMP payload analysis.  
-- Firewall blocking behavior.  
-- OS fingerprinting via packet size and payload.  
-- SSH version identification.  
-- Encryption in use (unreadable payload).  
+- [T1040 — Network Sniffing](https://attack.mitre.org/techniques/T1040/): the lab demonstrates authorized packet inspection and helps explain what a network observer can see.
 
-##  Lessons Learned
-- **Passive scanning** is powerful: Wireshark reveals host behavior without sending probes.  
-- **ICMP payloads** can fingerprint operating systems based on ASCII patterns and packet size.  
-- **Plaintext protocols** expose sensitive data (ICMP payload, unencrypted traffic).  
-- **Encrypted protocols** (SSH) protect confidentiality but still reveal metadata like client/server versions.  
-- Analysts must **validate findings** (to avoid false positives) and tie results to organizational security policy.  
+## Lessons Learned
 
----
+- Capture filters and display filters serve different purposes; a display filter changes what is shown from the capture.
+- Traffic direction matters when checking firewall behavior.
+- ICMP payload patterns are clues to correlate with other evidence.
+- Encryption protects session contents while leaving some connection and software metadata visible.
+- A clear comparison of commands, configuration, and capture details makes troubleshooting easier to review.
 
-**Outcome:** Successfully demonstrated passive traffic analysis with Wireshark — identifying OS types, detecting firewall rules, and distinguishing plaintext from encrypted communications.
+## Practical Value
 
----
+This work connects network troubleshooting with security analysis: establish connectivity, change one control, inspect the resulting traffic, and explain both the observed result and its scope.
 
-> **Author:** Komiljon Karimov  
-> **Mission:** Upskilling into Cybersecurity
+<p align="center"><img src="../../divider_wave.svg" alt="" width="100%" /></p>
+
+> **Author:** Komiljon Karimov<br>
+> **Mission:** Reliable technology and informed security decisions
+
+[Back to portfolio](../../README.md) · [Domain index](../README.md)

@@ -1,7 +1,11 @@
 # Lab: Splunk — Scheduling Reports & Alerts (Failed Root Logins)
 
-## Scenario
-I acted as a SOC analyst at **Buttercup Games** during a high-traffic promotion. My job was to keep a tight watch on Linux bastion hosts for risky authentication patterns while giving leadership a clean, repeatable snapshot of failed root logins they could rely on during morning standups. I built a baseline search, saved it as a report, scheduled it to email the admin team daily at 06:00, and then created a **real-time alert** for specific failed-password activity with throttling to avoid noise. I documented performance and outcomes so another analyst could take over mid-shift without losing context.
+[Portfolio](../../README.md) / [SIEM & Log Analysis](../README.md)
+
+[Overview](#overview) · [Objectives](#objectives) · [Environment & Tools](#environment--tools) · [What I Did](#what-i-did) · [Lessons Learned](#lessons-learned) · [Evidence & Results](#evidence--results)
+
+## Overview
+I completed this Splunk Education exercise using the fictional **Buttercup Games** authentication dataset. I saved a failed-root-login report, configured a daily 06:00 schedule and email action, then created a real-time alert for failed-password events excluding invalid usernames. I checked its trigger history and saved results for follow-up.
 
 ---
 
@@ -13,7 +17,7 @@ I acted as a SOC analyst at **Buttercup Games** during a high-traffic promotion.
 
 ---
 
-## Environment & Data
+## Environment & Tools
 - **Platform:** Splunk Enterprise 9.x (Search & Reporting)
 - **Indexes / sourcetypes:**  
   - `index=security` `sourcetype=linux_secure` (Linux auth)  
@@ -45,26 +49,26 @@ Saved as: **analyst_report_FailedRootLoginsLast24Hours**, then re-saved as **L1S
 ---
 
 ### 3) Schedule the report and notify stakeholders
-Schedule: **Run every day at 06:00**, **Time Range = Last 24 hours**, with **Send email → admin@buttercupgames.com**.
+Schedule: **Run every day at 06:00**, **Time Range = Last 24 hours**, with **Send email → `admin@buttercupgames.com`**, the address supplied by the lab. The screenshots verify the configured action and schedule, rather than inbox delivery.
 
 Screens:
 - Open schedule editor  
-  ![Edit schedule](./screenshots/Screenshot%202025-09-26%20142935.png)
+  ![Edit schedule](./screenshots/Screenshot%202025-09-26%20142650.png)
 - Next scheduled time confirmed  
-  ![Next scheduled time](./screenshots/Screenshot%202025-09-26%20143134.png)
+  ![Next scheduled time](./screenshots/Screenshot%202025-09-26%20142747.png)
 
 **Takeaway:** A scheduled report with email delivery eliminates “did anyone run the search?” during morning briefings.
 
 ---
 
 ### 4) Hunt noisy patterns and refine: failed password NOT invalid
-To separate real failures from “invalid user” noise, I tightened the query:
+I changed the search to exclude messages containing `invalid`:
 ```spl
 index=security sourcetype=linux_secure failed password NOT invalid
 ```
-![Tuned search for alert logic](./screenshots/Screenshot%202025-09-26%20142650.png)
+![Tuned search and Save As Alert menu](./screenshots/Screenshot%202025-09-26%20142935.png)
 
-**Why this matters:** Targets legitimate user accounts failing authentication and avoids predictable bot noise.
+**Why this matters:** This search is broader than the root-only report and can include failures for several usernames. Excluding invalid-user messages changes coverage; it can also hide relevant username-guessing activity, so I would review that activity separately.
 
 ---
 
@@ -78,18 +82,17 @@ Save As → **Alert**
 - **Action:** Add to Triggered Alerts, **Severity: High**
 
 Configuration flow:
-![Save as Alert](./screenshots/Screenshot%202025-09-26%20142747.png)
-![Alert form](./screenshots/Screenshot%202025-09-26%20143209.png)
+![Alert configuration form including per-result mode and host throttling](./screenshots/Screenshot%202025-09-26%20143134.png)
 
-**Takeaway:** Throttling by `host` avoids alert storms from the same machine while still catching multi-host spray.
+**Takeaway:** Host-based suppression limits repeated notifications from one host. Its grouping and 60-second window also affect which events create separate alerts, so they need tuning to the intended monitoring coverage.
 
 ---
 
 ### 6) Validate firings and preserve evidence
 - Alert overview with history:  
-  ![Alert overview](./screenshots/Screenshot%202025-09-26%20143338.png)
+  ![Alert overview and trigger history](./screenshots/Screenshot%202025-09-26%20143209.png)
 - Triggered Alerts view:  
-  ![Triggered Alerts list](./screenshots/Screenshot%202025-09-26%20143618.png)
+  ![Triggered Alerts list](./screenshots/Screenshot%202025-09-26%20143338.png)
 
 From a fired alert, I used **View results** to inspect the exact events and confirmed they matched intent.
 
@@ -112,7 +115,7 @@ index=security sourcetype=linux_secure failed password NOT invalid
 
 ---
 
-## Takeaways
+## Lessons Learned
 - Scheduled reports create dependable cadence for leadership without manual effort.
 - Real-time alerts must include **noise controls** (scope, keywords, throttling) to stay actionable.
 - Keeping **L1S1** and **L1S2** as named artifacts makes shift handoffs faster and cleaner.
@@ -120,20 +123,23 @@ index=security sourcetype=linux_secure failed password NOT invalid
 ---
 
 ## MITRE ATT&CK Mapping
-- **T1110 – Brute Force:** Repeated failed authentication attempts against Linux bastions.  
-- **T1078 – Valid Accounts (monitoring):** Follow-on detections often pair with successful logins from unusual sources.
+- **T1110 — Brute Force:** repeated failed authentication events are relevant investigation leads. The lab verifies search and alert behavior, rather than proving malicious intent or successful account access.
 
 ---
 
-## Artifacts
+## Evidence & Results
 - Lab guide PDF: [`The lab content`](./artifacts/Splunk%20lab3%20-%20Copy.pdf)
 
 ---
 
 ## Personal Reflection
-This lab was about discipline. A clean search is good; an automated, scheduled report that lands in an inbox before the standup is better. Adding a real-time alert with sane throttling turned the same logic into something the on-call can trust at 2 a.m. That’s the difference between “I ran a search” and “our process catches this every time.”
+Saving a search, scheduling it, and checking an alert trigger taught me to validate each stage separately. I would also review delivery, monitoring coverage, resource use, and suppression behavior before relying on the configuration operationally.
 
----
+![Saved alert and Edit menu](./screenshots/Screenshot%202025-09-26%20143618.png)
 
-> **Author:** Komiljon Karimov  
-> **Mission:** Upskilling into Cybersecurity
+<p align="center"><img src="../../divider_wave.svg" alt="" width="100%" /></p>
+
+> **Author:** Komiljon Karimov<br>
+> **Mission:** Reliable technology and informed security decisions
+
+[Back to portfolio](../../README.md) · [Domain index](../README.md)

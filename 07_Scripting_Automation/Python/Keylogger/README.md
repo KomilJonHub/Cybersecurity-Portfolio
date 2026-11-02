@@ -1,8 +1,12 @@
 # Python Authorized Keyboard Monitor
 
-> In this project, I built a visible, consent-gated Python keyboard monitor for an authorized CIS-30A classroom lab. The application demonstrates how keyboard events can be captured, represented as structured data, displayed in a graphical interface, and written to a local audit-style log. Safety controls deliberately prevent the project from behaving like a covert keylogger.
+[Portfolio](../../../README.md) / [Scripting & Automation](../../README.md)
 
-## Objective
+[Objectives](#objectives) · [Environment & Tools](#environment--tools) · [Testing and Validation](#testing-and-validation) · [Lessons Learned](#lessons-learned)
+
+> In this project, I built a visible, consent-gated Python keyboard monitor for an authorized CIS-30A classroom lab. The application demonstrates how keyboard events can be captured, represented as structured data, displayed in a graphical interface, and written to a local audit-style log. The interface and consent controls make the demonstration visible and deliberate; the project does not implement covert operation.
+
+## Objectives
 
 The goal of this project was to apply core Python concepts to a security-relevant automation problem while keeping the demonstration ethical, transparent, and limited in scope.
 
@@ -20,7 +24,7 @@ The finished application:
 
 This project is intended only for systems I own or have explicit permission to test. Demonstrations must use synthetic information—never real passwords, personal messages, payment data, or other sensitive content.
 
-## Tools Used
+## Environment & Tools
 
 - **Python 3** — application logic, object-oriented design, and file handling
 - **Tkinter / ttk** — visible authorization, controls, status, timer, typing area, and log viewer
@@ -102,13 +106,13 @@ For an authorized demonstration:
 
 ## Testing and Validation
 
-The test suite uses `FakeListener` and `FakeKey` objects; it does not attach to the real keyboard.
+The current [regression suite](tests/test_project.py) uses `FakeListener`, synthetic key objects, temporary files, and mocked interface objects. It does not attach to the real keyboard or open a GUI window. A guard fails the tests if they accidentally request the real listener factory.
 
 ```powershell
 .venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-The 12 automated tests cover:
+The 21 current automated tests cover:
 
 - authorization acceptance and rejection;
 - printable and special-key formatting;
@@ -118,12 +122,19 @@ The 12 automated tests cover:
 - isolation between consecutive sessions;
 - readable handling of Space, Enter, and Backspace;
 - UTF-8 session-log creation;
-- rejection of viewer paths outside `logs/`; and
-- invalid log-location handling.
+- rejection of viewer paths outside `logs/`;
+- invalid log-location handling;
+- listener startup failure and filename-collision protection;
+- symlink escape rejection; and
+- five-minute shutdown, timer scheduling, one-time session saving, and window-close coordination using mocked interface objects.
 
-**Validation result:** all 12 tests passed on July 21, 2026.
+**Current validation:** 21 tests passed with no skips on CPython 3.12.14 / Linux during the October 30, 2026 portfolio refresh. No real input capture was performed. These tests validate the core logic and selected interface coordination; they do not substitute for a Windows GUI demonstration.
+
+**Original testing:** I completed a twelve-test run during the original project. The original suite was not recovered from the available local files, relevant private branches, or private path history. The suite now published here was added during this refresh and is separate from that historical run.
 
 ## Sample Synthetic Output
+
+The excerpt below illustrates the report format; its duration and event count are example values, not results from the current test run.
 
 ```text
 SESSION SUMMARY
@@ -184,7 +195,9 @@ Understanding event-capture behavior helps defenders recognize why unfamiliar ba
 
 **Outcome:** Successfully developed and validated a modular Python application that demonstrates authorized input-capture mechanics, structured event logging, GUI design, object-oriented programming, and defensive security considerations.
 
----
+<p align="center"><img src="../../../divider_wave.svg" alt="" width="100%" /></p>
 
-> **Author:** Komiljon Karimov  
-> **Mission:** Upskilling into Cybersecurity
+> **Author:** Komiljon Karimov<br>
+> **Mission:** Reliable technology and informed security decisions
+
+[Back to portfolio](../../../README.md) · [Domain index](../../README.md)

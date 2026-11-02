@@ -2,3 +2,7 @@
 *.pkt
 *.zip
 *.iso
+
+# Python validation caches
+__pycache__/
+*.py[cod]

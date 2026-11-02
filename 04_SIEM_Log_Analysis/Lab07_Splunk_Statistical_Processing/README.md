@@ -1,5 +1,9 @@
 # Lab 07 — Splunk Statistical Processing (Charts • Timecharts • Stats • Eval • Formatting)
 
+[Portfolio](../../README.md) / [SIEM & Log Analysis](../README.md)
+
+[Objectives](#objectives) · [Environment & Tools](#environment--tools) · [Lessons Learned](#lessons-learned) · [Evidence & Results](#evidence--results)
+
 In this lab I practiced how to **transform**, **manipulate**, and **present** machine data so decision-makers can read it in seconds. I stayed close to real stakeholder asks: usage trends for security, referrer patterns for marketing, badge counts for Facilities, and revenue slices for Sales.
 
 
@@ -48,7 +52,7 @@ Lab07_Splunk_Statistical_Processing/
 
 ---
 
-# Lab Exercise 1 — Transforming Data
+## Lab Exercise 1 — Transforming Data
 
 ### Scenario A — Internet usage by category (last 24h)
 
@@ -174,7 +178,7 @@ index=sales sourcetype=vendor_sales VendorID<4000
 
 ---
 
-# Lab Exercise 2 — Manipulating Data with `eval`
+## Lab Exercise 2 — Manipulating Data with `eval`
 
 ### Scenario G — Weekly actions: totals, averages, revenue (previous week)
 
@@ -199,10 +203,10 @@ index=web sourcetype=access_combined
 
 ---
 
-### Scenario H — Daily web volume in MB (previous week)
+### Scenario H — Daily Web Volume in Binary Megabytes (Previous Week)
 
 **Ask (Networking):** “How much data do web servers serve per day?”  
-**Approach:** Sum request `bytes` per day, convert to megabytes using `pow()`.
+**Approach:** Sum request `bytes` per day, convert to binary megabytes (MiB) using `pow()`.
 
 **SPL**
 ```spl
@@ -212,7 +216,7 @@ index=web sourcetype=access_combined
 | fields - bytes
 ```
 
-**Result:** Line chart and table, MB per day.  
+**Result:** Line chart and table of daily volume. The historical output labels the field `megabytes`; dividing by `1024²` gives MiB.<br>
 ![L2S2 Table](./screenshots/L2S2-table.png)  
 ![L2S2 Chart](./screenshots/L2S2-chart.png)
 
@@ -241,7 +245,7 @@ index=web sourcetype=access_combined
 - Ratios are fragile if denominators can be zero; add guards if needed.
 - Rounding to 2 decimals is usually enough for operational conversations.
 
-# Lab Exercise 3 — Formatting & Scenario Synthesis
+## Lab Exercise 3 — Formatting & Scenario Synthesis
 
 ### Scenario J — Hours where web revenue > 2× retail (last 24h)
 
@@ -332,7 +336,7 @@ index=web sourcetype=access_combined
 
 ## Lessons Learned
 
-- **Transform first, filter second.** `timechart`/`stats` → `where` keeps intent clean and execution fast.
+- **Filter at the appropriate stage.** Restrict source events early where possible, and use `where` after `stats` or `timechart` for conditions on aggregate results.
 - **Name for the audience.** `rename` and field order via `fields` make the output instantly readable.
 - **Round deliberately.** Round for presentation, not during intermediate math.
 - **Limit and remove.** `limit=…`, `useother=f`, and `fields - …` tighten the story.
@@ -360,7 +364,7 @@ This lab is **analytics-foundation** work. It does not target a single technique
 
 ---
 
-## Credits
+## Evidence & Results
 
 - Dataset and prompts from Splunk Education lab brief: [`Guided lab content`](./artifacts/Splunk%20lab6.pdf)
 
@@ -378,11 +382,11 @@ top <field> limit=N by k useother=f showperc/f
 rare <field> limit=N
 ```
 
-> If you clone this repo and paste the SPL under each task with the same time ranges, you will reproduce my results and visuals one-for-one.
+> To repeat these methods, use the corresponding course dataset, knowledge objects, and time windows. Relative dates resolve at execution time, so historical counts and visuals can differ from the preserved screenshots.
 
-````
+<p align="center"><img src="../../divider_wave.svg" alt="" width="100%" /></p>
 
----
+> **Author:** Komiljon Karimov<br>
+> **Mission:** Reliable technology and informed security decisions
 
-> **Author:** Komiljon Karimov  
-> **Mission:** Upskilling into Cybersecurity
+[Back to portfolio](../../README.md) · [Domain index](../README.md)

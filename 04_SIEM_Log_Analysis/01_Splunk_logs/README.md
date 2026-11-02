@@ -1,119 +1,137 @@
-## Scenario Overview
-I worked on this simulated real-world lab project as part of my Splunk Power User certification prep to gain hands-on experience with the Splunk SIEM tool. The scenario put me in the role of a SOC analyst at Buttercup Games, responsible for monitoring customer activity, employee access, and network traffic during a high-profile sales promotion.  
+# Lab 01 — Splunk: Using Fields and Search-Time Extractions
 
-In this setup, I had to validate e-commerce actions from the web servers, track authentication attempts on the Linux bastion hosts, and monitor email, proxy, and firewall logs for suspicious behavior. The goal was to practice using Splunk fields to separate normal activity from threats, build searches that could evolve into detections, and deliver clear reports that other analysts could rely on in a real shift handoff.
+[Portfolio](../../README.md) / [SIEM & Log Analysis](../README.md)
 
+[Overview](#overview) · [Objectives](#objectives) · [Environment & Tools](#environment--tools) · [What I Did](#what-i-did) · [Evidence & Results](#evidence--results) · [Lessons Learned](#lessons-learned) · [Practical Value](#practical-value)
 
-Key telemetry I focused on:
-- **Online Sales (`index=web`, `sourcetype=access_combined`)** – tracked cart activity, HTTP codes, and product details.
-- **Web Server Security (`index=security`, `sourcetype=linux_secure`)** – monitored shell access and privileged logons.
-- **Email Security (`index=security`, `sourcetype=cisco_esa`)** – cross-checked senders and recipients for phishing.
-- **Web Proxy (`index=security`, `sourcetype=cisco_wsa_squid`)** – flagged odd destinations and malware verdicts.
-- **Firewall (`index=security`, `sourcetype=cisco_firewall`)** – mapped usernames to network paths and policy hits.
+## Overview
 
-Throughout the lab I stuck to three habits: pivot on fields, build searches that double as detections, and turn quick findings into repeatable knowledge.
+I completed this Splunk Education lab using the fictional **Buttercup Games** dataset. I explored web-event fields, searched Linux authentication failures, formatted a checkout-error report, and compared example-driven extraction with explicit regular expressions. The work demonstrates how I check field coverage and turn raw events into readable reports.
 
+The lab environment also supplies email, proxy, and firewall data. The completed tasks below focus on web and Linux authentication events.
 
-> 📄 **Lab Playbook:** [Splunk 1 – Using Fields Lab Instructions](artifacts/Splunk%201%20lab%20instructions.pdf)
+## Objectives
 
-## Lab Outcomes at a Glance
-Here’s how each saved search (L1S1 – L2S2) paid off for the SOC mission.
+- Compare field presence, missing values, and purchase/non-purchase searches.
+- Find failed authentication events associated with admin usernames.
+- Format checkout errors with readable field labels.
+- Compare `erex` and `rex` extractions and validate the resulting counts.
 
-| Exercise | What I Focused On | SPL Snapshot | Why It Mattered |
-| --- | --- | --- | --- |
-| L1S1 | Validating web purchase actions against promo traffic | `index=web sourcetype=access_combined action=*` | Confirmed we capture both purchase and non-purchase activity before locking in cart monitoring. |
-| L1S2 | Hunting invalid admin logons in real time | `index=security sourcetype=linux_secure failed invalid admin* \| fields user src_ip app` | Surfaced brute-force patterns against admin aliases so IAM could respond quickly. |
-| L1S3 | Packaging checkout errors for partners | `... \| table clientip host status \| rename ...` | Delivered a human-friendly error report for incident responders and web ops. |
-| L2S1 | Trialing `erex` for quick authentication labels | `... \| erex event_description examples="Accepted password ","Failed password" \| stats ...` | Fast-tracked triage by tagging outcomes without waiting on formal regex. |
-| L2S2 | Locking in `rex` for dependable enrichment | `... \| rex field=_raw "(?<event_description>...)" \| rex ...` | Produced repeatable port attribution that stands up in dashboards and alerts. |
+## Environment & Tools
 
----
+- **Splunk Enterprise** — Search & Reporting in the education lab
+- **Web data:** `index=web sourcetype=access_combined`
+- **Authentication data:** `index=security sourcetype=linux_secure`
+- **Course guide:** [Using Fields lab instructions](artifacts/Splunk%201%20lab%20instructions.pdf)
 
-### L1S1 – Using Fields to Validate E-commerce Activity
-- **Objective:** Make sure Buttercup’s promo purchases are accounted for and expose any missing `action` values before an alert goes live.
-- **Representative SPL:**
-  ```spl
-  index=web sourcetype=access_combined earliest=-1d@d latest=@d
-  | search action=*
-  | stats count by action
-  ```
-  I iterated with `action=purchase`, `action!=purchase`, and `action=*` to confirm which events carried the field before saving the search.
-- **Evidence:**
-  - [Lab Report PDF](artifacts/L1S1-2025-09-23.pdf)
-  - ![Search Walkthrough Screenshot](screenshots/Screenshot%202025-09-23%20152641.png)
+## What I Did
 
-### L1S2 – Hunting Invalid Admin Logons
-- **Objective:** Keep a rolling, last-60-minute view of failed admin authentications so brute-force attempts can be squashed quickly.
-- **Representative SPL:**
-  ```spl
-  index=security sourcetype=linux_secure earliest=-60m@m latest=now
-  "failed" "invalid"
-  | search user=admin*
-  | fields user src_ip app
-  ```
-- **What stood out to me:**
+The SPL snippets describe the method. The original PDF exports and screenshots retain the actual historical results and selected time windows.
 
-- **Evidence:**
-  - [Lab Report PDF](artifacts/L1S2-2025-09-23.pdf)
-  - ![Execution Screenshot](screenshots/Screenshot%202025-09-23%20154425.png)
+### L1S1 — Compare Field Values and Field Presence
 
-### L1S3 – Reporting Web Checkout Errors with Friendly Labels
-- **Objective:** Hand web operations a report they can act on immediately when checkout errors spike.
-- **Representative SPL:**
-  ```spl
-  index=web sourcetype=access_combined action=purchase status>399 earliest=-4h@h latest=now
-  | table clientip host status
-  | rename clientip AS "Customer IP" host AS "Web Server" status AS "HTTP Status"
-  ```
+I explored `action`, `sale_price`, and `categoryId` in web events. I compared events with and without an `action` value and tested purchase/non-purchase conditions before saving the report.
 
-- **Evidence:**
-  - [Lab Report PDF](artifacts/L1S3-2025-09-23.pdf)
-  - ![Formatted Results Screenshot](screenshots/Screenshot%202025-09-23%20153647.png)
+```spl
+index=web sourcetype=access_combined earliest=-1d@d latest=@d
+| stats count by action
+```
 
-### L2S1 – Building Temporary Fields with `erex`
-- **Objective:** Experiment with `erex` so I could label authentication outcomes on the fly while deciding whether a regex investment was worth it.
-- **Representative SPL:**
-  ```spl
-  index=security sourcetype=linux_secure earliest=-7d@d latest=@d "port"
-  | erex field=_raw mode=examples event_description examples="Accepted password ","Failed password"
-  | erex field=_raw mode=examples port examples="22","2222","443"
-  | stats count(port) AS port_count by event_description
-  ```
+This summary counts events with an `action` value. To check missing values separately, I used `NOT action=*`; `action!=purchase` only returns events where `action` exists with another value.
 
-- **Evidence:**
-  - [Lab Report PDF](artifacts/L2S1-2025-09-23.pdf)
-  - ![erex Results Screenshot](screenshots/Screenshot%202025-09-23%20162114.png)
+- [Original L1S1 report export](artifacts/L1S1-2025-09-23.pdf)
+- Purchase search and field exploration:
 
-### L2S2 – Operationalizing Regex-Based Field Extractions
-- **Objective:** Graduate the `erex` experiment into production-ready `rex` commands that my teammates can trust in dashboards.
-- **Representative SPL:**
-  ```spl
-  index=security sourcetype=linux_secure earliest=-7d@d latest=@d "port"
-  | rex field=_raw "(?<event_description>(Accepted|Failed) password)"
-  | rex field=_raw "port (?<port>\d+)"
-  | stats count(port) AS port_count by event_description port
-  | sort - port_count
-  ```
-- **Evidence:**
-  - [Lab Report PDF](artifacts/L2S2-2025-09-23.pdf)
-  - ![Regex Extraction Screenshot](screenshots/Screenshot%202025-09-23%20162644.png)
+![Purchase-event search with the fields sidebar](screenshots/Screenshot%202025-09-23%20153647.png)
+![categoryId values inspected during purchase-event exploration](screenshots/Screenshot%202025-09-23%20154425.png)
 
-## Additional Visual References
-![Search Progression Screenshot – Job Inspector tip nudging me from `erex` to `rex`.](screenshots/Screenshot%202025-09-23%20162114.png)
-![Fields Sidebar Snapshot – The fields I leaned on when slicing product metadata.](screenshots/Screenshot%202025-09-23%20162130.png)
+### L1S2 — Find Failed Admin Authentication Events
+
+I searched a last-60-minute window for failed logins involving invalid admin usernames, then retained fields useful for reviewing the user and source.
+
+```spl
+index=security sourcetype=linux_secure earliest=-60m@m latest=now
+failed invalid user=admin*
+| fields user src_ip app
+```
+
+The saved report contains repeated failed authentication events from several sources. Those events are investigation leads; a count of failures alone does not establish a successful compromise.
+
+- [Original L1S2 report export](artifacts/L1S2-2025-09-23.pdf)
+
+![Saved L1S2 authentication-failure report](screenshots/Screenshot%202025-09-23%20162114.png)
+![L1S2 search and selected authentication fields](screenshots/Screenshot%202025-09-23%20162130.png)
+
+### L1S3 — Format Checkout Errors for Review
+
+I filtered purchase events with HTTP status codes above 399, selected the fields needed for follow-up, and renamed the columns.
+
+```spl
+index=web sourcetype=access_combined action=purchase status>399
+| table clientip host status
+| rename clientip AS "Customer IP" host AS "Web Server" status AS "HTTP Status"
+```
+
+The guide requests a last-four-hour window; the screenshot records a last-60-minute view, while the later PDF export contains a different result count. Keeping the time window visible helps explain why the outputs differ.
+
+- [Original L1S3 report export](artifacts/L1S3-2025-09-23.pdf)
+
+![L1S3 checkout-error table with renamed columns](screenshots/Screenshot%202025-09-23%20162644.png)
+
+The historical output labels the client address **Customer ID**; the clarified example above uses **Customer IP** to describe the field precisely.
+
+### L2S1 — Explore Example-Driven Extraction with `erex`
+
+I extracted `event_description` from authentication messages using example phrases and compared the resulting counts. A representative search is:
+
+```spl
+index=security sourcetype=linux_secure port
+| erex event_description examples="Accepted password,Failed password"
+| stats count(src_port) by event_description
+```
+
+The [original L2S1 report](artifacts/L2S1-2025-09-23.pdf) records accepted/failed password counts and zero `src_port` counts for two other message categories. That prompted a closer look at which fields were actually available in those events.
+
+### L2S2 — Review and Use Explicit Extraction with `rex`
+
+I added a `port` extraction, reviewed Splunk's generated regular expression through the Job messages, and used `rex` for the follow-up report. The [original L2S2 report](artifacts/L2S2-2025-09-23.pdf) retains counts for all four message categories, including **Received disconnect** and **Server listening**.
+
+A simplified extraction pattern illustrates the approach:
+
+```spl
+index=security sourcetype=linux_secure port
+| rex field=_raw "(?<event_description>Accepted password|Failed password|Received disconnect|Server listening)"
+| rex field=_raw "port (?<port>\d+)"
+| stats count(port) by event_description
+```
+
+The course guide explains the extraction progression. [Splunk's `erex` reference](https://help.splunk.com/en/splunk-enterprise/search/spl-search-reference/9.4/search-commands/erex) documents the command syntax and how to review the generated regex. A `rex` command inside a search remains search-time extraction; reusable automatic field extraction requires a saved knowledge-object configuration.
+
+## Evidence & Results
+
+| Exercise | Published result |
+|---|---|
+| L1S1 | Original event export plus purchase/field-exploration screenshots |
+| L1S2 | Authentication-failure report and matching search/report screenshots |
+| L1S3 | Checkout-error report and matching renamed-column screenshot |
+| L2S1 | PDF export of counts using the initial extraction |
+| L2S2 | PDF export showing the revised port counts |
 
 ## Lessons Learned
-Working through this lab gave me more than just practice with SPL syntax—it showed me how Splunk can be used as a real SOC tool under pressure. I learned how to:
 
-- Validate business-critical activity (like purchases) against raw telemetry to detect fraud or broken workflows.  
-- Surface brute-force attempts and privileged account misuse in near real time.  
-- Translate raw logs into human-friendly reports that other teams can act on immediately.  
-- Use quick field extractions (`erex`) to move fast, then solidify them with regex (`rex`) for lasting detections.  
-- Balance speed and accuracy—sometimes the fast answer buys time, while the durable one builds trust for future shifts.  
+- Field presence, `!=`, and `NOT` have different effects on missing values.
+- Inspecting raw events helps explain a missing or zero field count.
+- Time windows must be recorded when comparing saved output with screenshots.
+- Readable labels make a report more useful for technical follow-up.
+- Example-driven extraction is a starting point; explicit regex and result checks make its behavior easier to explain.
 
-**Takeaway:** This lab reinforced that effective SOC work isn’t about chasing perfect queries—it’s about using fields smartly, validating results, and leaving behind reliable searches that teammates can depend on.
+## Practical Value
 
----
+This lab gave me practice troubleshooting data coverage, reviewing authentication activity, and documenting searches another person can understand and repeat in the same lab environment.
 
-> **Author:** Komiljon Karimov  
-> **Mission:** Upskilling into Cybersecurity
+<p align="center"><img src="../../divider_wave.svg" alt="" width="100%" /></p>
+
+> **Author:** Komiljon Karimov<br>
+> **Mission:** Reliable technology and informed security decisions
+
+[Back to portfolio](../../README.md) · [Domain index](../README.md)

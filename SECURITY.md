@@ -6,7 +6,7 @@ This repository is a **personal cybersecurity portfolio** containing labs, confi
 ## Reporting Issues
 If you notice an error, risky instruction, misconfiguration, or other concern:
 - Open a GitHub **Issue** in this repository, or
-- Contact me on **LinkedIn**: https://www.linkedin.com/in/komiljon-karimov-secops
+- Contact me on **LinkedIn**: https://www.linkedin.com/in/komiljon-karimov
 
 No bug bounty is offered. There is no SLA, but I review reports and update content as time permits.
 
