@@ -292,7 +292,7 @@ CSAP is a **stackable designation** based on qualifying CompTIA certifications, 
 
 My experience spans engineering, teaching, technical consulting, and practical IT support. I hold a master's degree in Power Supply Engineering and a bachelor's degree in Electromechanics. That foundation helps me break down problems, explain technical choices, and connect detailed work to the needs of the people using a system.
 
-At **4Prep Academy**, I provided primarily internal staff support, largely on a volunteer basis. I helped with Windows 10/11 troubleshooting, basic Office/Microsoft 365 questions, printers, cameras, desktop setup, connecting phones and computers, website setup and maintenance, internal communication tools, and basic networking. This work required patience, clear explanations, and practical problem solving.
+At **4Prep Academy**, I provided primarily internal staff support. I helped with Windows 10/11 troubleshooting, basic Office/Microsoft 365 questions, printers, cameras, desktop setup, connecting phones and computers, website setup and maintenance, internal communication tools, and basic networking. This work required patience, clear explanations, and practical problem solving.
 
 <p align="center">
   <img src="./divider_wave.svg" alt="Accent divider" />
